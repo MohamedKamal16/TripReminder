@@ -18,41 +18,24 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.List;
 
 public class Home extends AppCompatActivity {
-/*Add[ViewPager2-TabLayout-Upcomin_view-Profile-History_view]
+/*Add[ViewPager2-TabLayout]
 * to make home shape*/
-
     public ViewPager2 viewPager;
-    //To connet table layout with fragment
     private TabLayout tabLayout;
-    private Upcomin_view upcomin_view;
-    private Profile_view profile_view;
-    private History_view history_view;
-    private List<Fragment> fragments;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         initComponent();
-
-
-
-
-
-
 
     }
 
   private void initComponent() {
         tabLayout=findViewById(R.id.main_home_tabLayout);
         viewPager=findViewById(R.id.main_home_pager);
-
       //initializing viewPager by my view adabter
-    ViewerPageAdapter adapter = new ViewerPageAdapter(this);
+        ViewerPageAdapter adapter = new ViewerPageAdapter(this);
         viewPager.setAdapter(adapter);
             //link tab with viewpager2
         new TabLayoutMediator(tabLayout, viewPager,(tab, position) -> {
@@ -68,9 +51,7 @@ public class Home extends AppCompatActivity {
                     tab.setText("profile");
                     break;
             }
-        }).attach();
-
-    }
+        }).attach(); }
 
 
 }
