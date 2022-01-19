@@ -1,26 +1,39 @@
 package com.example.tripplanner.Adapter;
-/*
-import android.view.ViewGroup;
-
+;
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class ViewerPageAdapter extends RecyclerView.Adapter<> {
+import com.example.tripplanner.Home.Fragment.History_view;
+import com.example.tripplanner.Home.Fragment.Profile_view;
+import com.example.tripplanner.Home.Fragment.Upcomin_view;
+
+import java.util.List;
+
+public class ViewerPageAdapter extends FragmentStateAdapter {
+
+
+    public ViewerPageAdapter(@NonNull FragmentActivity fragmentActivity) {
+        super(fragmentActivity);
+    }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public Fragment createFragment(int position) {
+        switch (position) {
+            case 0:
+                return  new Upcomin_view();
+            case 1:
+                return  new History_view();
+            default:
+                return  new Profile_view();
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 3;
     }
 }
-*/
