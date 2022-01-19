@@ -1,14 +1,15 @@
 package com.example.tripplanner.Home.Activity;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Bundle;
 
+import com.example.tripplanner.Adapter.ViewerPageAdapter;
 import com.example.tripplanner.Home.Fragment.History_view;
-import com.example.tripplanner.Home.Fragment.Profile;
+import com.example.tripplanner.Home.Fragment.Profile_view;
 import com.example.tripplanner.Home.Fragment.Upcomin_view;
 import com.example.tripplanner.R;
 import com.google.android.material.tabs.TabLayout;
@@ -17,14 +18,14 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.List;
 
 public class Home extends AppCompatActivity {
-/*Add[ViewPager-TabLayout-Upcomin_view-Profile-History_view]
+/*Add[ViewPager2-TabLayout-Upcomin_view-Profile-History_view]
 * to make home shape*/
 
     public ViewPager2 viewPager;
     //To connet table layout with fragment
     private TabLayout tabLayout;
     private Upcomin_view upcomin_view;
-    private Profile profile_view;
+    private Profile_view profile_view;
     private History_view history_view;
     private List<Fragment> fragments;
 
@@ -35,16 +36,11 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-       initComponent();
 
-        //inflating views
-        viewPager = findViewById(R.id.main_home_pager);
-        tabLayout = findViewById(R.id.main_home_tabLayout);
+        initComponent();
 
-        //initializing fragments
-        upcomin_view = new Upcomin_view();
-        history_view = new History_view();
-        profile_view = new Profile();
+
+
 
 
 
@@ -55,13 +51,24 @@ public class Home extends AppCompatActivity {
         tabLayout=findViewById(R.id.main_home_tabLayout);
         viewPager=findViewById(R.id.main_home_pager);
 
-
-
-      //  getSupportActionBar().setElevation(0);
-
-
-
-
+      //initializing viewPager by my view adabter
+    ViewerPageAdapter adapter = new ViewerPageAdapter(this);
+        viewPager.setAdapter(adapter);
+            //link tab with viewpager2
+        new TabLayoutMediator(tabLayout, viewPager,(tab, position) -> {
+            //give name in case of position
+            switch (position) {
+                case 0:
+                  tab.setText("UpComing");
+                  break;
+                case 1:
+                    tab.setText("History");
+                    break;
+                default:
+                    tab.setText("profile");
+                    break;
+            }
+        }).attach();
 
     }
 
