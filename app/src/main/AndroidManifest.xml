@@ -17,33 +17,22 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Home.Activity.MainLogin"
-
-            android:exported="false" />
-        <activity
             android:name=".Home.Activity.MainRegister"
             android:exported="false" />
         <activity
             android:name=".Home.Activity.Home"
-            android:exported="true">
-
+            android:exported="false"/>
+        <activity
+            android:name=".Home.Activity.MainLogin"
             android:exported="true" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Home.Activity.MainRegister"
-            android:exported="false"
-            />
-        <activity
-            android:name=".Home.Activity.Home"
-            android:exported="false" >
 
-        </activity>
+
     </application>
 
 </manifest>
