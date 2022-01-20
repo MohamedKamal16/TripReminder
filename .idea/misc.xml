@@ -12,6 +12,15 @@
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/fragment_upcoming.xml" value="0.21105072463768115" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/fragment_upcoming_main__home.xml" value="0.21105072463768115" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2703125" />
+<<<<<<< Updated upstream
+=======
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_upcoming.xml" value="0.15307971014492755" />
+        <entry key="..\:/TripReminder/app/src/main/res/drawable/ic_google.xml" value="0.1" />
+        <entry key="..\:/TripReminder/app/src/main/res/drawable/input_register.xml" value="0.1" />
+        <entry key="..\:/TripReminder/app/src/main/res/layout/activity_main_login.xml" value="0.25" />
+        <entry key="..\:/TripReminder/app/src/main/res/layout/activity_main_register.xml" value="0.25" />
+        <entry key="..\:/TripReminder/app/src/main/res/layout/resetpassword.xml" value="0.2" />
+>>>>>>> Stashed changes
       </map>
     </option>
   </component>
