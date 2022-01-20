@@ -5,5 +5,16 @@
     <string name="tab_text_2">Tab 2</string>
     <string name="Hint_TripName">TripName</string>
     <string name="Hint_StartPoint">StartPoint</string>
+    <string name="logoRegister">Register</string>
+    <string name="ed_register_username" />
+    <string name="ed_register_email" />
+    <string name="ed_register_password" />
+    <string name="btn_register">Register</string>
+    <string name="tv_register_haveaccount">Already Have an Account</string>
+    <string name="ed_register_confirmpass" />
+    <string name="tv_login_logo">Log in</string>
+    <string name="tv_login_forgetpass">Forgot Password?</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_loginGoogle">Sign in with Google</string>
 
 </resources>
