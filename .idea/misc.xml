@@ -3,13 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/activity_add.xml" value="0.1322463768115942" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/activity_home.xml" value="0.176" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/activity_main.xml" value="0.1265625" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/activity_main_home.xml" value="0.21105072463768115" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/activity_main_login.xml" value="0.2028985507246377" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/fragment_history.xml" value="0.21105072463768115" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/fragment_profile.xml" value="0.21105072463768115" />
-        <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/fragment_upcoming.xml" value="0.21105072463768115" />
+        <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/fragment_upcoming.xml" value="0.1" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/fragment_upcoming_main__home.xml" value="0.21105072463768115" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2703125" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_upcoming.xml" value="0.15307971014492755" />
@@ -19,6 +20,7 @@
         <entry key="..\:/TripReminder/app/src/main/res/layout/activity_main_register.xml" value="0.25" />
         <entry key="..\:/TripReminder/app/src/main/res/layout/resetpassword.xml" value="0.2" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_home.xml" value="0.1431159420289855" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_upcoming.xml" value="0.15307971014492755" />
 
       </map>
