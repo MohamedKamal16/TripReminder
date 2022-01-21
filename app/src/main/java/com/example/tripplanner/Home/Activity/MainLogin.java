@@ -31,7 +31,7 @@ public class MainLogin extends AppCompatActivity {
         binding=ActivityMainLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         auth=FirebaseAuth.getInstance();
-        resetalert= new AlertDialog.Builder(this);
+        resetalert= new AlertDialog.Builder(MainLogin.this);
         inflater=this.getLayoutInflater();
         binding.tvLoginSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class MainLogin extends AppCompatActivity {
               resetalert.setTitle("Reset Forget Password?")
                       .setMessage("Enter your Email to get password reset link.")
                       .setPositiveButton("Reset", (dialogInterface, i) -> {
-                          /*
+
                           EditText email=view.findViewById(R.id.ed_resetpassword_login);
                           if(email.getText().toString().isEmpty())
                           {
@@ -63,7 +63,7 @@ public class MainLogin extends AppCompatActivity {
                           auth.sendPasswordResetEmail(email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                               @Override
                               public void onSuccess(Void unused) {
-                                  Toast.makeText(getApplicationContext(),"Reset Email send",Toast.LENGTH_LONG).show();
+                                  Toast.makeText(getApplicationContext(),"Reset Email send Check your Email",Toast.LENGTH_LONG).show();
 
                               }
                           }).addOnFailureListener(new OnFailureListener() {
@@ -75,11 +75,12 @@ public class MainLogin extends AppCompatActivity {
                               }
                           });
 
-                           */
+
 
                       }).setNegativeButton("Cancel",null)
-                      //.setView(view1)
-                      .create().show();
+                     .setView(view1)
+                      .create()
+                      .show();
             }
         });
 
