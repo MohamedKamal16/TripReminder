@@ -9,7 +9,7 @@
     tools:context=".Home.Activity.AddActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentNotes"
+        android:id="@+id/switchFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"

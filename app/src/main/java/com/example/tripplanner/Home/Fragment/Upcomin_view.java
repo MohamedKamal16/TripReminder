@@ -9,22 +9,33 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tripplanner.Adapter.UpcomingRecycleAdapter;
 import com.example.tripplanner.Home.Activity.AddActivity;
 import com.example.tripplanner.R;
+import com.example.tripplanner.TripData.Trip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Upcomin_view extends Fragment {
-
-    RecyclerView tripRecycleView;
+    //refernce fbutton and recycle view
     FloatingActionButton floatingBtnAdd;
+    RecyclerView tripRecycleView;
+    //refernce to addapter
+    private UpcomingRecycleAdapter upcomingRecycleAdapter;
+    private List tripsList = new ArrayList<Trip>();
+
+    public Upcomin_view(){};
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         tripRecycleView=view.findViewById(R.id.trip_recycleView);
-
+        upcomingRecycleAdapter = new UpcomingRecycleAdapter( tripsList,getContext(),getActivity());
         floatingBtnAdd = view.findViewById(R.id.add_flout_btn);
 
         addTrip();

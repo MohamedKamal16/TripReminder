@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tripplanner.R;
+
 import java.util.List;
 
 
@@ -40,7 +43,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
     }
 
-    
      /*
     @Override
     public void onBindViewHolder(MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
@@ -95,12 +97,9 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
     @Override
     public int getItemCount() {
-        return 0;
-    }
- /*  @Override
-    public int getItemCount() {
         return tripList.size();
-    }*/
+    }
+
 
 
 
@@ -228,7 +227,10 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         ImageButton start_btn;
         ImageButton editNotes;
 
-        public MyViewHolder(View itemView) {
+
+
+
+       public MyViewHolder(View itemView) {
             super(itemView);
           /*  sourceTxt=itemView.findViewById(R.id.source_txt);
             destinationTxt=itemView.findViewById(R.id.destination_txt);
