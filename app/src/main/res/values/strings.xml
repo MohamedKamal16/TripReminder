@@ -17,4 +17,18 @@
     <string name="btn_login">Login</string>
     <string name="btn_loginGoogle">Sign in with Google</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Hint_EndPoint">EndPoint</string>
+    <string name="AddNotes">ADDNOTE</string>
+    <string name="SingleTrip">Single Trip</string>
+    <string name="RoundTrip">Round Trip</string>
+    <string name="EndPoint">End Point</string>
+    <string name="StartPoint">Start Point</string>
+    <string name="ChooseDate">Date</string>
+    <string name="TripName">Trip Name</string>
+    <string name="ChooseTime">Time</string>
+    <string name="Add">Add</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
