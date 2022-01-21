@@ -3,35 +3,43 @@
     package="com.example.tripplanner">
 
     <application
-        android:allowBackup="true"
-
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TripPlanner">
+
         <activity
             android:name=".Home.Activity.AddActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity
-            android:name=".Home.Activity.MainRegister"
-            android:exported="false" />
+
         <activity
             android:name=".Home.Activity.Home"
             android:exported="false"/>
+
+        <activity
+            android:name=".Home.Activity.MainRegister"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false"
+            />
+
         <activity
             android:name=".Home.Activity.MainLogin"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+
+
+
         </activity>
-
 
     </application>
 
