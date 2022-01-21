@@ -252,8 +252,7 @@ android:layout_height="match_parent">
             android:backgroundTint="@color/GrayFlash"
             android:src="@drawable/calendar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/btn_time2"

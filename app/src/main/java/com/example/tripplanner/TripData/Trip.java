@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey;
 
 
 public class Trip {
-
     @NonNull
     private String userID;
     @NonNull
