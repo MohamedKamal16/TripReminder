@@ -25,6 +25,7 @@ public class MainLogin extends AppCompatActivity {
   FirebaseAuth auth;
   AlertDialog.Builder resetalert;
   LayoutInflater inflater;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,18 +34,21 @@ public class MainLogin extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         resetalert= new AlertDialog.Builder(this);
         inflater=this.getLayoutInflater();
+
         binding.tvLoginSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainLogin.this,MainRegister.class));
             }
         });
+
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkcrededentails();
             }
         });
+
         binding.tvLoginForgitpasss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +88,7 @@ public class MainLogin extends AppCompatActivity {
         });
 
     }
+
     private void checkcrededentails()
     {
 
@@ -121,6 +126,7 @@ public class MainLogin extends AppCompatActivity {
         }
 
     }
+
     private void showErorr(EditText text, String s)
     {
         text.setError(s);

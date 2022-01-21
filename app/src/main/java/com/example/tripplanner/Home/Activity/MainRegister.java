@@ -19,12 +19,14 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainRegister extends AppCompatActivity {
  ActivityMainRegisterBinding binding;
  FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityMainRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         firebaseAuth=FirebaseAuth.getInstance();
+
         binding.tvRegisterAlreadyaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +46,7 @@ public class MainRegister extends AppCompatActivity {
         String email=binding.edRegisterEmail.getText().toString();
         String password=binding.edRegisterpassword.getText().toString();
         String conPassword=binding.edRegisterConfirmpassword.getText().toString();
+
         if(username.isEmpty() || username.length()<7)
         {
             showErorr(binding.edRegisterUsername,"your username is not valid");
@@ -77,6 +80,7 @@ public class MainRegister extends AppCompatActivity {
         }
 
     }
+
   private void showErorr(EditText text,String s)
   {
       text.setError(s);
