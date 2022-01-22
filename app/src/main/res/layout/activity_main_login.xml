@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/button_regisiter"
-        android:backgroundTint="@android:color/background_dark"
+        android:backgroundTint="@color/white"
         android:text="@string/btn_login"
 
         android:textAllCaps="false"
@@ -119,7 +119,7 @@
 
             android:layout_height="wrap_content"
             android:text="SignUp?"
-            android:textColor="@color/design_default_color_error"
+            android:textColor="#B39DDB"
             android:textStyle="bold" />
 
 

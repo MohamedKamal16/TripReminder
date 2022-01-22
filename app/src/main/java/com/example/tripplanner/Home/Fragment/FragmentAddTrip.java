@@ -1,15 +1,22 @@
 package com.example.tripplanner.Home.Fragment;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+
+
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,11 +37,23 @@ import com.example.tripplanner.TripData.Trip;
 import com.google.android.gms.common.internal.Constants;
 import com.google.android.gms.location.places.Place;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.example.tripplanner.R;
+import com.example.tripplanner.TripData.Trip;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -46,24 +65,93 @@ public class FragmentAddTrip extends Fragment {
     private ViewGroup container;
     private Bundle savedInstanceState;
 
-    public FragmentAddTrip() {
-    }
 
-    ;
+public FragmentAddTrip() {} ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
 
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+        Places.initialize(getContext(), API_KEY);
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_trip, container, false);
+        view = inflater.inflate(R.layout.fragment_add_trip, container, false);
+        //Method have declared variable
+        initComponent();
+        //on click listner methods
+        editTextStartPoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                placesAutocompletes(StartPointFlag);
+            }
+        });
+        editTextEndPoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                placesAutocompletes(ENDPOINTFlag);
+            }
+        });
+
+
+        return view;
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // check place request code
+        if (requestCode == StartPointFlag) {
+            if (resultCode == RESULT_OK) {
+                placeStartPoint = Autocomplete.getPlaceFromIntent(data);
+
+                if (placeStartPoint.getLatLng() != null) {
+                    editTextStartPoint.setText(placeStartPoint.getName());
+                }
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+            return;
+
+        } else if (requestCode == ENDPOINTFlag) {
+            if (resultCode == RESULT_OK) {
+                placeEndPoint = Autocomplete.getPlaceFromIntent(data);
+                Log.i(TAG, "Place: " + placeEndPoint.getName() + ", " + placeEndPoint.getId());
+                editTextEndPoint.setText(placeEndPoint.getName());
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+
+    //Method to handle place
+    private void placesAutocompletes(int flag) {
+        List<Place.Field> fieldList = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
+        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY
+                , fieldList).build(getContext());
+
+        startActivityForResult(intent, flag);
+    }
+
+    //declare variable
+    private void initComponent() {
+
         editTextTripName = view.findViewById(R.id.ediTxt_tripName);
         textViewTripName = view.findViewById(R.id.txtView_tripName);
         textViewDate = view.findViewById(R.id.txtView_date);
@@ -86,6 +174,7 @@ public class FragmentAddTrip extends Fragment {
         btnSaveTrip = view.findViewById(R.id.btn_saveTrip);
         btnAddNotes = view.findViewById(R.id.btn_addNotes);
         constraintLayoutRoundTrip = view.findViewById(R.id.constraintLayoutAddRound);
+
 
         Log.i(TAG, "onCreateView: ");
        /* if (AddTripActivity.key == 2) {
@@ -158,6 +247,12 @@ public class FragmentAddTrip extends Fragment {
     }
 
 
+
+         
+
+
+    //declare Variables
+
     EditText editTextTripName;
     EditText editTextStartPoint;
     EditText editTextEndPoint;
@@ -177,18 +272,18 @@ public class FragmentAddTrip extends Fragment {
     RadioGroup radioGroup;
     ConstraintLayout constraintLayoutRoundTrip;
 
-
+    View view;
+    //for plac Api (link-startActivity flag for start and end)
+    private static final String API_KEY = "AIzaSyBpK-AM55wLemXfm-ffY9IpHA3MkF5vd0M";
+    private static final int StartPointFlag = 1;
+    private static final int ENDPOINTFlag = 2;
     public static final String TAG = "AddTripFragment";
-    private static final String apiKey = "AIzaSyAKXUZsOm7RLbPEAQQxp6TZsU9YWLeh5Pg";
-    private static final int AUTOCOMPLETE_REQUEST_CODE_STARTPOINT = 1;
-    private static final int AUTOCOMPLETE_REQUEST_CODE_ENDPOINT = 2;
     public static final String PREF_NAME = "MY_PREF";
 
     Calendar calender = Calendar.getInstance();
     final int year = calender.get(Calendar.YEAR);
     final int month = calender.get(Calendar.MONTH);
     final int day = calender.get(Calendar.DAY_OF_MONTH);
-
     SharedPreferences myPref;
     Calendar calenderNormal;
     Calendar calendarRound;
@@ -207,6 +302,7 @@ public class FragmentAddTrip extends Fragment {
     Trip trip;
     Trip selectedTrip;
     ArrayList<String> resultNotes;
+
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -423,4 +519,7 @@ public class FragmentAddTrip extends Fragment {
 
 
 
+
+
+}
 

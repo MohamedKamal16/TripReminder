@@ -12,12 +12,6 @@
         android:layout_height="match_parent"
         android:background="@color/GrayFlash"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    <ImageView
-        android:id="@+id/emptyList_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        ></ImageView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_flout_btn"
