@@ -34,10 +34,12 @@ public class Home extends AppCompatActivity {
   private void initComponent() {
         tabLayout=findViewById(R.id.main_home_tabLayout);
         viewPager=findViewById(R.id.main_home_pager);
+
       //initializing viewPager by my view adabter
-        ViewerPageAdapter adapter = new ViewerPageAdapter(this);
-        viewPager.setAdapter(adapter);
-            //link tab with viewpager2
+      ViewerPageAdapter adapter = new ViewerPageAdapter(this);
+      viewPager.setAdapter(adapter);
+
+      //link tab with viewpager2
         new TabLayoutMediator(tabLayout, viewPager,(tab, position) -> {
             //give name in case of position
             switch (position) {
