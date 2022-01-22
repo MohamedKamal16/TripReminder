@@ -11,14 +11,26 @@ import android.widget.Toast;
 
 import com.example.tripplanner.R;
 import com.example.tripplanner.databinding.ActivityMainRegisterBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class MainRegister extends AppCompatActivity {
-    ActivityMainRegisterBinding binding;
-    FirebaseAuth firebaseAuth;
+
+ ActivityMainRegisterBinding binding;
+ FirebaseAuth firebaseAuth;
+ FirebaseUser user;
+  DatabaseReference databaseReference;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +72,35 @@ public class MainRegister extends AppCompatActivity {
                 @Override
                 public void onSuccess(AuthResult authResult) {
                     //on succes
-                    startActivity(new Intent(getApplicationContext(), Home.class));
-                    finish();
+
+                    user = firebaseAuth.getCurrentUser();
+                    String userId = user.getUid();
+
+                    databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId);
+                    HashMap<String, String> hashMap = new HashMap<>();
+                    hashMap.put("username", username);
+                    hashMap.put("Email", email);
+                    databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            startActivity(new Intent(getApplicationContext(), Home.class));
+                            finish();
+
+                        }
+                    });
+
                 }
+
+
+
+
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     //onfalier
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+
                 }
             });
         }
