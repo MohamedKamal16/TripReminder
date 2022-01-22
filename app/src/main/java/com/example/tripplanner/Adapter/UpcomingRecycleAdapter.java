@@ -29,7 +29,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
     }
 
 
-
     @NonNull
     @Override
     public UpcomingRecycleAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,7 +37,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
     @Override
     public void onBindViewHolder(@NonNull UpcomingRecycleAdapter.MyViewHolder holder, int position) {
-
 
 
     }
@@ -217,10 +215,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
     }*/
 
 
-
-
-
-
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView sourceTxt, destinationTxt, nameTxt, timeTxt, dateTxt;
         ImageView trip_img;
@@ -228,9 +222,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         ImageButton editNotes;
 
 
-
-
-       public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView) {
             super(itemView);
           /*  sourceTxt=itemView.findViewById(R.id.source_txt);
             destinationTxt=itemView.findViewById(R.id.destination_txt);

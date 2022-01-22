@@ -60,7 +60,8 @@ public class Trip {
         this.calendar = calendar;
     }
 
-    public Trip() { }
+    public Trip() {
+    }
 
     @NonNull
     public String getUserID() {
