@@ -4,12 +4,12 @@ package com.example.tripplanner.Home.Fragment;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -19,11 +19,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
@@ -33,10 +36,16 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.example.tripplanner.R;
 import com.example.tripplanner.TripData.Trip;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class FragmentAddTrip extends Fragment {
@@ -74,6 +83,26 @@ public class FragmentAddTrip extends Fragment {
             }
         });
 
+        imageButtonDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calenderDate(textViewDate, 1,calenderNormal);
+                textViewTime.setText("");
+            }
+        });
+
+        imageButtonTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isDateCorrect)
+                    calenderTime(textViewTime, 1,calenderNormal);
+                else
+                    Toast.makeText(getContext(), "Please choose date first", Toast.LENGTH_SHORT).show();
+
+                isFirstTimeSeleceted = true;
+            }
+        });
+
         return view;
     }
 
@@ -81,33 +110,37 @@ public class FragmentAddTrip extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+       // check place request code
         if (requestCode == StartPointFlag) {
             if (resultCode == RESULT_OK) {
                 placeStartPoint = Autocomplete.getPlaceFromIntent(data);
-                Log.i(TAG, "Place: " + placeStartPoint.getName() + ", " + placeStartPoint.getId());
+
                 if (placeStartPoint.getLatLng() != null) {
                     editTextStartPoint.setText(placeStartPoint.getName());
-                    Log.i(TAG, "Place: " + placeStartPoint.getLatLng());
                 }
-
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                // TODO: Handle the error.
+            }
+            else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(data);
                 Log.i(TAG, status.getStatusMessage());
-            } else if (resultCode == RESULT_CANCELED) {
+            }
+            else if (resultCode == RESULT_CANCELED) {
                 // The user canceled the operation.
             }
             return;
-        } else if (requestCode == ENDPOINTFlag) {
+
+        }
+        else if (requestCode == ENDPOINTFlag) {
             if (resultCode == RESULT_OK) {
                 placeEndPoint  = Autocomplete.getPlaceFromIntent(data);
                 Log.i(TAG, "Place: " + placeEndPoint.getName() + ", " + placeEndPoint.getId());
                 editTextEndPoint.setText(placeEndPoint.getName());
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+            }
+            else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 // TODO: Handle the error.
                 Status status = Autocomplete.getStatusFromIntent(data);
                 Log.i(TAG, status.getStatusMessage());
-            } else if (resultCode == RESULT_CANCELED) {
+            }
+            else if (resultCode == RESULT_CANCELED) {
                 // The user canceled the operation.
             }
             return;
@@ -116,6 +149,194 @@ public class FragmentAddTrip extends Fragment {
 
     }
 
+
+
+    public void calenderDate(TextView textViewDate1, int check, Calendar incomingCal) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                int nowYear;
+                int nowMonth;
+                int nowDay;
+                month = month + 1;
+                String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                if(check == 1) {
+                    String[] dateTotal = date.split("-");
+                    nowYear = Integer.valueOf(dateTotal[2]);
+                    nowMonth = Integer.valueOf(dateTotal[1]);
+                    nowDay = Integer.valueOf(dateTotal[0]);
+                }
+                else{
+                    String oneTripDate = textViewDate.getText().toString();
+                    String[] oneTripDateSplits = oneTripDate.split("-");
+                    nowYear = Integer.valueOf(oneTripDateSplits[2]);
+                    nowMonth = Integer.valueOf(oneTripDateSplits[1]);
+                    nowDay = Integer.valueOf(oneTripDateSplits[0]);
+                }
+                if(year == nowYear && month == nowMonth && day== nowDay){
+                    if(check==1)
+                        isDateToday=true;
+                    else
+                        isDateTodayRoundTrip=true;
+                }else{
+                    if(check==1)
+                        isDateToday=false;
+                    else
+                        isDateTodayRoundTrip=false;
+                }
+                if (year > nowYear) {
+                    if (check == 1) {
+                        isDateCorrect = true;
+                    } else {
+                        isDateCorrectRoundTrip = true;
+                    }
+                    //calnder
+                    incomingCal.set(Calendar.DAY_OF_MONTH,day);
+                    incomingCal.set(Calendar.MONTH,month-1);
+                    incomingCal.set(Calendar.YEAR,year);
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                    textViewDate1.setText(format.format(incomingCal.getTime()));
+                }else if(year == nowYear){
+                    if (month > nowMonth) {
+                        if (check == 1) {
+                            isDateCorrect = true;
+                        } else {
+                            isDateCorrectRoundTrip = true;
+                        }
+                        //calnder
+                        incomingCal.set(Calendar.DAY_OF_MONTH, day);
+                        incomingCal.set(Calendar.MONTH, month - 1);
+                        incomingCal.set(Calendar.YEAR, year);
+                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                        textViewDate1.setText(format.format(incomingCal.getTime()));
+                    } else if(month == nowMonth){
+                        if (day >= nowDay) {
+                            if (check == 1) {
+                                isDateCorrect = true;
+                            } else {
+                                isDateCorrectRoundTrip = true;
+                            }
+                            //calnder
+                            incomingCal.set(Calendar.DAY_OF_MONTH,day);
+                            incomingCal.set(Calendar.MONTH,month-1);
+                            incomingCal.set(Calendar.YEAR,year);
+                            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                            textViewDate1.setText(format.format(incomingCal.getTime()));
+                        } else {
+                            Toast.makeText(getContext(), "Date is wrong", Toast.LENGTH_SHORT).show();
+                            if (check == 1) {
+                                isDateCorrect = false;
+                            } else {
+                                isDateCorrectRoundTrip = false;
+                            }
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "Date is wrong", Toast.LENGTH_SHORT).show();
+                        if (check == 1) {
+                            isDateCorrect = false;
+                        } else {
+                            isDateCorrectRoundTrip = false;
+                        }
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Date is wrong", Toast.LENGTH_SHORT).show();
+                    if (check == 1) {
+                        isDateCorrect = false;
+                    } else {
+                        isDateCorrectRoundTrip = false;
+                    }
+                }
+            }
+        }, year, month, day);
+        datePickerDialog.show();
+    }
+    public void calenderTime(TextView textViewTime1, int check, Calendar incomingCal) {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHours, int selectedMinute) {
+                int hour;
+                int min;
+
+                Log.i(TAG, "hours: " + selectedHours + " minutes: " + selectedMinute);
+
+                Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"));
+                Date currentLocalTime = cal.getTime();
+                DateFormat date = new SimpleDateFormat("HH:mm");
+                String localTime = date.format(currentLocalTime);
+
+                if(check==1){
+                    String[] localTimeSplit = localTime.split(":");
+                    hour = Integer.valueOf(localTimeSplit[0]);
+                    min =  Integer.valueOf(localTimeSplit[1]); }
+                else{
+                    String[] localTimeFirstTrip = textViewTime.getText().toString().split(":");
+                    hour = Integer.valueOf(localTimeFirstTrip[0]);
+                    min = Integer.valueOf(localTimeFirstTrip[1]);}
+
+                if (isDateToday || isDateTodayRoundTrip) {
+                    if (selectedHours > hour) {
+                        if (check == 1) {
+                            isTimeCorrect = true;
+                        }
+                        else {
+                            isTimeCorrectRoundTrip = true;
+                        }
+
+                        incomingCal.set(Calendar.HOUR_OF_DAY,selectedHours);
+                        incomingCal.set(Calendar.MINUTE,selectedMinute);
+                        incomingCal.set(Calendar.SECOND,0);
+                        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+                        textViewTime1.setText(format.format(incomingCal.getTime()));
+                    } else {
+                        if (selectedHours == hour) {
+                            if (selectedMinute > min) {
+                                if (check == 1)
+                                    isTimeCorrect = true;
+                                else
+                                    isTimeCorrectRoundTrip = true;
+
+                                incomingCal.set(Calendar.HOUR_OF_DAY,selectedHours);
+                                incomingCal.set(Calendar.MINUTE,selectedMinute);
+                                incomingCal.set(Calendar.SECOND,0);
+                                SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+                                textViewTime1.setText(format.format(incomingCal.getTime()));
+
+                            } else {
+                                Toast.makeText(getContext(), "Time is not correct", Toast.LENGTH_SHORT).show();
+                                if (check == 1)
+                                    isTimeCorrect = false;
+                                else
+                                    isTimeCorrectRoundTrip = false;
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "Time is not correct", Toast.LENGTH_SHORT).show();
+                            if (check == 1)
+                                isTimeCorrect = false;
+                            else
+                                isTimeCorrectRoundTrip = false;
+                        }
+                    }
+                }else{
+                    incomingCal.set(Calendar.HOUR_OF_DAY,selectedHours);
+                    incomingCal.set(Calendar.MINUTE,selectedMinute);
+                    incomingCal.set(Calendar.SECOND,0);
+                    SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+                    textViewTime1.setText(format.format(incomingCal.getTime()));
+                    writeSp();
+                }
+            }
+        }, 12, 0, false);
+        timePickerDialog.show();
+    }
+    public void writeSp(){
+        SharedPreferences.Editor editor=myPref.edit();
+        editor.putLong("CalendarNormal",calenderNormal.getTimeInMillis());
+        editor.putLong("CalendarRound",calendarRound.getTimeInMillis());
+        editor.commit();
+
+    }
+
+    //Method to handle place
     private void placesAutocompletes(int flag) {
         List<Place.Field> fieldList= Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
         Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY
@@ -123,30 +344,32 @@ public class FragmentAddTrip extends Fragment {
 
         startActivityForResult(intent, flag);
     }
+
+    //declare variable
     private void initComponent() {
-        editTextTripName = view.findViewById(R.id.ediTxt_tripName);
-        textViewTripName = view.findViewById(R.id.txtView_tripName);
-        textViewDate = view.findViewById(R.id.txtView_date);
-        imageButtonDate = view.findViewById(R.id.btn_date);
-        textViewTime = view.findViewById(R.id.txtview_time);
-        imageButtonTime = view.findViewById(R.id.btn_time);
-        editTextStartPoint = view.findViewById(R.id.editTxt_startPoint);
-        editTextStartPoint.setFocusable(false);
-        editTextEndPoint = view.findViewById(R.id.editTxt_endPoint);
-        editTextEndPoint.setFocusable(false);
-        textViewTime2 = view.findViewById(R.id.txtView_Time2);
-        textViewDate2 = view.findViewById(R.id.txtView_Date2);
-        imageButtonDate2 = view.findViewById(R.id.btn_date2);
-        imageButtonDate2.setFocusable(false);
-        imageButtonTime2 = view.findViewById(R.id.btn_time2);
-        imageButtonTime2.setFocusable(false);
-        radioGroup=view.findViewById(R.id.radioGroup_typeTrip);
-        radioButtonOneDirection = view.findViewById(R.id.radioBtn_oneDirection);
-        radioButtonRoundTrip = view.findViewById(R.id.radioBtn_roundTrip);
-        btnSaveTrip = view.findViewById(R.id.btn_saveTrip);
-        btnAddNotes = view.findViewById(R.id.btn_addNotes);
-        constraintLayoutRoundTrip=view.findViewById(R.id.constraintLayoutAddRound);
-    }
+            editTextTripName = view.findViewById(R.id.ediTxt_tripName);
+            textViewTripName = view.findViewById(R.id.txtView_tripName);
+            textViewDate = view.findViewById(R.id.txtView_date);
+            imageButtonDate = view.findViewById(R.id.btn_date);
+            textViewTime = view.findViewById(R.id.txtview_time);
+            imageButtonTime = view.findViewById(R.id.btn_time);
+            editTextStartPoint = view.findViewById(R.id.editTxt_startPoint);
+            editTextStartPoint.setFocusable(false);
+            editTextEndPoint = view.findViewById(R.id.editTxt_endPoint);
+            editTextEndPoint.setFocusable(false);
+            textViewTime2 = view.findViewById(R.id.txtView_Time2);
+            textViewDate2 = view.findViewById(R.id.txtView_Date2);
+            imageButtonDate2 = view.findViewById(R.id.btn_date2);
+            imageButtonDate2.setFocusable(false);
+            imageButtonTime2 = view.findViewById(R.id.btn_time2);
+            imageButtonTime2.setFocusable(false);
+            radioGroup=view.findViewById(R.id.radioGroup_typeTrip);
+            radioButtonOneDirection = view.findViewById(R.id.radioBtn_oneDirection);
+            radioButtonRoundTrip = view.findViewById(R.id.radioBtn_roundTrip);
+            btnSaveTrip = view.findViewById(R.id.btn_saveTrip);
+            btnAddNotes = view.findViewById(R.id.btn_addNotes);
+            constraintLayoutRoundTrip=view.findViewById(R.id.constraintLayoutAddRound);
+        }
 
    /* public void checkData(){
         Log.i(TAG, "checkData: ");
@@ -274,6 +497,7 @@ public class FragmentAddTrip extends Fragment {
 
         }
     }*/
+
 
 
 //declare Variables
