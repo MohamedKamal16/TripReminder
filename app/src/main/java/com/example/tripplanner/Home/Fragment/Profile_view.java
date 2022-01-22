@@ -60,10 +60,13 @@ public class Profile_view extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Profile_view.this,"Erorr No data on to profile");
+
+             //   Toast.makeText(Profile_view.this,"Erorr No data on to profile");
+
 
             }
         });
+
 
     }
 }
