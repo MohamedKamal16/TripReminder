@@ -30,6 +30,7 @@ public class Profile_view extends Fragment {
     FragmentProfileBinding pbinding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view=inflater.inflate(R.layout.fragment_profile,container,false);
         firebaseAuth=FirebaseAuth.getInstance();
 
@@ -63,5 +64,6 @@ public class Profile_view extends Fragment {
 
             }
         });
+
     }
 }

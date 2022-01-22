@@ -15,7 +15,7 @@ import com.example.tripplanner.R;
 
 public class MainNotification extends AppCompatActivity {
 
-    private static final String CHANNEL_ID ="1" ;
+    private static final String CHANNEL_ID = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MainNotification extends AppCompatActivity {
         setContentView(R.layout.activity_main_notification);
     }
 
-    public void addNotuification(){
+    public void addNotuification() {
         Intent intent = new Intent(this, MainNotification.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
@@ -42,6 +42,7 @@ public class MainNotification extends AppCompatActivity {
 // notificationId is a unique int for each notification that you must define
         notificationManager.notify(10, builder.build());
     }
+
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library

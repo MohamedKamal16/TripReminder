@@ -23,11 +23,11 @@ public class ViewerPageAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return  new Upcomin_view();
+                return new Upcomin_view();
             case 1:
-                return  new History_view();
+                return new History_view();
             default:
-                return  new Profile_view();
+                return new Profile_view();
         }
 
     }

@@ -13,7 +13,8 @@ import com.example.tripplanner.R;
 
 public class MainSplash extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN_TIME_OUT=2000;
+    private static int SPLASH_SCREEN_TIME_OUT = 2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,7 @@ public class MainSplash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(MainSplash.this,Home.class);
+                Intent intent = new Intent(MainSplash.this, Home.class);
 
                 //Intent is used to switch from one activity to another.
 
@@ -32,6 +33,6 @@ public class MainSplash extends AppCompatActivity {
                 finish();
             }
 
-        },SPLASH_SCREEN_TIME_OUT);
+        }, SPLASH_SCREEN_TIME_OUT);
     }
 }
