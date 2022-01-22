@@ -47,7 +47,7 @@ public class MainLogin extends AppCompatActivity {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkcrededentails();
+              //  checkcrededentails();
             }
         });
 
@@ -125,10 +125,13 @@ public class MainLogin extends AppCompatActivity {
             auth.getInstance().signout();
             avtivity
              */
-        }
+        });
 
     }
+        });
 
+
+    }
     private void showErorr(EditText text, String s) {
         text.setError(s);
         text.requestFocus();
@@ -141,5 +144,5 @@ public class MainLogin extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), Home.class));
             finish();
         }
-    }
 }
+    }

@@ -50,8 +50,8 @@ public class Profile_view extends Fragment {
                     HashMap<String,String> hashMap=(HashMap<String, String>)snapshot.getValue();
                     String userName=hashMap.get("username");
                     String Email=hashMap.get("Email");
-                //    pbinding.tvUsernameprofile.setText(userName);
-                //    pbinding.tvEmailprofile.setText(Email);
+                    pbinding.tvUsernameprofile.setText(userName);
+                    pbinding.tvEmailprofile.setText(Email);
 
 
 
