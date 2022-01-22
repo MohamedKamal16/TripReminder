@@ -28,22 +28,25 @@ public class Upcomin_view extends Fragment {
     private UpcomingRecycleAdapter upcomingRecycleAdapter;
     private List tripsList = new ArrayList<Trip>();
 
-    public Upcomin_view(){};
+    public Upcomin_view() {
+    }
+
+    ;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tripRecycleView=view.findViewById(R.id.trip_recycleView);
-        upcomingRecycleAdapter = new UpcomingRecycleAdapter( tripsList,getContext(),getActivity());
+        tripRecycleView = view.findViewById(R.id.trip_recycleView);
+        upcomingRecycleAdapter = new UpcomingRecycleAdapter(tripsList, getContext(), getActivity());
         floatingBtnAdd = view.findViewById(R.id.add_flout_btn);
 
         addTrip();
     }
 
     @Override
-    public View onCreateView( LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_upcomingtrips,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_upcomingtrips, container, false);
     }
 
     private void addTrip() {
@@ -58,7 +61,8 @@ public class Upcomin_view extends Fragment {
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
-        });    }
+        });
+    }
 
 
 }

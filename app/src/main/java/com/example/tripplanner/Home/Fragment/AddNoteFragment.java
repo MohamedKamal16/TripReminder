@@ -13,13 +13,14 @@ import com.example.tripplanner.R;
 public class AddNoteFragment extends Fragment {
 
 
-    public  AddNoteFragment () {}
+    public AddNoteFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        }
+    }
 
 
     @Override

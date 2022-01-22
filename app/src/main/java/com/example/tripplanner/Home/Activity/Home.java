@@ -18,8 +18,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.List;
 
 public class Home extends AppCompatActivity {
-/*Add[ViewPager2-TabLayout]
-* to make home shape*/
+    /*Add[ViewPager2-TabLayout]
+     * to make home shape*/
     public ViewPager2 viewPager;
     private TabLayout tabLayout;
 
@@ -31,21 +31,21 @@ public class Home extends AppCompatActivity {
 
     }
 
-  private void initComponent() {
-        tabLayout=findViewById(R.id.main_home_tabLayout);
-        viewPager=findViewById(R.id.main_home_pager);
+    private void initComponent() {
+        tabLayout = findViewById(R.id.main_home_tabLayout);
+        viewPager = findViewById(R.id.main_home_pager);
 
-      //initializing viewPager by my view adabter
-      ViewerPageAdapter adapter = new ViewerPageAdapter(this);
-      viewPager.setAdapter(adapter);
+        //initializing viewPager by my view adabter
+        ViewerPageAdapter adapter = new ViewerPageAdapter(this);
+        viewPager.setAdapter(adapter);
 
-      //link tab with viewpager2
-        new TabLayoutMediator(tabLayout, viewPager,(tab, position) -> {
+        //link tab with viewpager2
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             //give name in case of position
             switch (position) {
                 case 0:
-                  tab.setText("UpComing");
-                  break;
+                    tab.setText("UpComing");
+                    break;
                 case 1:
                     tab.setText("History");
                     break;
@@ -53,7 +53,8 @@ public class Home extends AppCompatActivity {
                     tab.setText("profile");
                     break;
             }
-        }).attach(); }
+        }).attach();
+    }
 
 
 }

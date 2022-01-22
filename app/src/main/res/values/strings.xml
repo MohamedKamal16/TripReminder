@@ -16,6 +16,13 @@
     <string name="tv_login_forgetpass">Forgot Password?</string>
     <string name="btn_login">Login</string>
     <string name="btn_loginGoogle">Sign in with Google</string>
+    <string name="log_out">logout</string>
+    <string name="history">history</string>
+    <string name="syn">syn</string>
+    <string name="e_mail">email</string>
+    <string name="phonenumber">username</string>
+    <string name="channel_name">channelname</string>
+    <string name="channel_description">channeldes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="Hint_EndPoint">EndPoint</string>
