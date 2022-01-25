@@ -13,7 +13,7 @@ import com.example.tripplanner.R;
 public class AddActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     Fragment fragment;
-
+    public static int ID;
     public static int key;
 
 
@@ -40,6 +40,7 @@ public class AddActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction().add(R.id.switchFragment, fragment, "fragment").commit();
             }
             if (savedInstanceState != null) {
+                //not clear
                 fragment = fragmentManager.findFragmentByTag("fragment");
                 fragment = getSupportFragmentManager().getFragment(savedInstanceState, "myFragmentName");
             }

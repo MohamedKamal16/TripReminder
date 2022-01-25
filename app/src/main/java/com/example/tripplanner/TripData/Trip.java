@@ -1,10 +1,18 @@
 package com.example.tripplanner.TripData;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.example.tripplanner.Home.Activity.Home;
 
+import java.util.ArrayList;
 
+/*room deal with @ annoitation this class like column in Table*/
+@Entity //this class room table if want to change table name (tableName = "Name")
+
+@TypeConverters(DataConverter.class)
 public class Trip {
     @NonNull
     private String userID;
@@ -29,35 +37,32 @@ public class Trip {
     private String date;
     @NonNull
     private String time;
-    @NonNull
-    private int tripImg;
+
     @NonNull
     private String tripStatus;
-    /*
-    @TypeConverters(DataConverter.class)
-    private ArrayList<String> notes;*/
+
+    private ArrayList<String> notes;
+
     @NonNull
     private long calendar;
 
-    public Trip(@NonNull String userID, int id, @NonNull String tripName,
-                @NonNull String startPoint, double startPointLatitude, double startPointLongitude,
-                @NonNull String endPoint, double endPointLatitude, double endPointLongitude,
-                @NonNull String date, @NonNull String time, int tripImg, @NonNull String tripStatus,
-                long calendar) {
+    public Trip(@NonNull String userID, @NonNull String tripName, @NonNull String startPoint,@NonNull double startPointLat, @NonNull double startPointLong,
+                @NonNull String endPoint, @NonNull double endPointLat, @NonNull double endPointLong,
+                @NonNull String date, @NonNull String time, String tripStatus, @NonNull long calendar,ArrayList<String> notes) {
         this.userID = userID;
+        this.calendar = calendar;
         this.id = id;
         this.tripName = tripName;
         this.startPoint = startPoint;
-        this.startPointLatitude = startPointLatitude;
-        this.startPointLongitude = startPointLongitude;
+        this.startPointLatitude=startPointLat;
+        this.startPointLongitude=startPointLong;
         this.endPoint = endPoint;
-        this.endPointLatitude = endPointLatitude;
-        this.endPointLongitude = endPointLongitude;
+        this.endPointLatitude = endPointLat;
+        this.endPointLongitude = endPointLong;
         this.date = date;
         this.time = time;
-        this.tripImg = tripImg;
         this.tripStatus = tripStatus;
-        this.calendar = calendar;
+        this.notes=notes;
     }
 
     public Trip() {
@@ -157,13 +162,6 @@ public class Trip {
         this.time = time;
     }
 
-    public int getTripImg() {
-        return tripImg;
-    }
-
-    public void setTripImg(int tripImg) {
-        this.tripImg = tripImg;
-    }
 
     @NonNull
     public String getTripStatus() {
@@ -180,5 +178,12 @@ public class Trip {
 
     public void setCalendar(long calendar) {
         this.calendar = calendar;
+    }
+    public ArrayList<String> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(ArrayList<String> notes) {
+        this.notes = notes;
     }
 }

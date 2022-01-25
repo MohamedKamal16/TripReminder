@@ -47,7 +47,7 @@ public class MainLogin extends AppCompatActivity {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  checkcrededentails();
+                checkcrededentails();
             }
         });
 
@@ -60,7 +60,7 @@ public class MainLogin extends AppCompatActivity {
                       .setMessage("Enter your Email to get password reset link.")
                       .setPositiveButton("Reset", (dialogInterface, i) -> {
 
-                          /*
+
 
                           EditText email=view.findViewById(R.id.ed_resetpassword_login);
                           if(email.getText().toString().isEmpty())
@@ -120,18 +120,13 @@ public class MainLogin extends AppCompatActivity {
 
                 }
             });
-            /*
-            //signout
-            auth.getInstance().signout();
-            avtivity
-             */
-        });
+
+        }
 
     }
-        });
 
 
-    }
+
     private void showErorr(EditText text, String s) {
         text.setError(s);
         text.requestFocus();
@@ -144,5 +139,5 @@ public class MainLogin extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), Home.class));
             finish();
         }
-}
+        }
     }
