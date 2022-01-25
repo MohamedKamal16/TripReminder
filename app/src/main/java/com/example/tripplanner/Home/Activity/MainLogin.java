@@ -63,13 +63,14 @@ public class MainLogin extends AppCompatActivity {
 
 
                           EditText email=view.findViewById(R.id.ed_resetpassword_login);
-                          if(email.getText().toString().isEmpty())
+                          String Email=email.getText().toString().trim();
+                          if(Email.isEmpty())
                           {
                               email.setError("Email field");
                               email.requestFocus();
                               return;
                           }
-                          auth.sendPasswordResetEmail(email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                          auth.sendPasswordResetEmail(Email).addOnSuccessListener(new OnSuccessListener<Void>() {
                               @Override
                               public void onSuccess(Void unused) {
                                   Toast.makeText(getApplicationContext(),"Reset Email send Check your Email",Toast.LENGTH_LONG).show();

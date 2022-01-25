@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="6">
+
+
+            <ImageView
+                android:id="@+id/trip_img"
+                android:layout_width="46dp"
+                android:layout_height="61dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+
+                card_view:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="299dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/tv_datetrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:text="@string/tv_addtrip"
+                    android:textColor="#302828"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_nametrip"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_timetrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="140dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:text="@string/tv_timetrip"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@+id/tv_datetrip"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_nametrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_datetrip"
+                    app:layout_constraintHorizontal_bias="0.231"
+                    app:layout_constraintStart_toStartOf="@+id/tv_datetrip"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_datetrip" />
+
+                <TextView
+                    android:id="@+id/tv_starttrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="13dp"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_endtrip"
+                    app:layout_constraintStart_toStartOf="@+id/tv_nametrip"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_nametrip" />
+
+                <TextView
+                    android:id="@+id/tv_endtrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="45dp"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_nametrip"
+                    app:layout_constraintStart_toStartOf="@+id/tv_starttrip"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_starttrip" />
+
+                <ImageButton
+                    android:id="@+id/btn_starttrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/white"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    android:src="@drawable/ic_send_24"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_editNote"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_timetrip"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/tv_timetrip"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_timetrip"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/btn_editNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/white"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    android:src="@drawable/notepad"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_addtrip_update"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/btn_starttrip"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_starttrip"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/btn_addtrip_cancel"
+                    android:layout_width="93dp"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/btn_addtrip_cancel"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.59"
+                    app:layout_constraintStart_toEndOf="@+id/btn_editNote"
+                    app:layout_constraintTop_toTopOf="@+id/btn_editNote" />
+
+                <Button
+                    android:id="@+id/btn_addtrip_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/btn_addtrip_update"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_addtrip_cancel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/btn_starttrip"
+                    app:layout_constraintTop_toTopOf="@+id/btn_starttrip" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
