@@ -1,17 +1,15 @@
 package com.example.tripplanner.Home.Fragment;
 
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import com.example.tripplanner.R;
-import com.example.tripplanner.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,20 +25,38 @@ public class Profile_view extends Fragment {
     FirebaseUser user;
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
-    FragmentProfileBinding pbinding;
+
+    TextView tv_username,tv_email;
+    Button btnlogout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_profile,container,false);
         firebaseAuth=FirebaseAuth.getInstance();
+        tv_username=view.findViewById(R.id.tvUsernameprofile);
+        tv_email=view.findViewById(R.id.tvEmailprofile);
+        btnlogout=view.findViewById(R.id.buttonOut);
+            setprofile(tv_username,tv_email);
+        btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             /*
+            //signout
+            auth.getInstance().signout();
+            avtivity
+
+                firebaseAuth.signOut();
+                startActivity(new Intent(Profile_view.this, MainLogin.class));
+          */   }
+        });
 
         return view;
 
     }
-    public void setprofile()
+    public void setprofile(TextView tv_username, TextView tv_email)
     {
         user= firebaseAuth.getCurrentUser();
-        String userId=user.getUid();
+       String userId=user.getUid();
         databaseReference= FirebaseDatabase.getInstance().getReference("users").child(userId);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -50,10 +66,8 @@ public class Profile_view extends Fragment {
                     HashMap<String,String> hashMap=(HashMap<String, String>)snapshot.getValue();
                     String userName=hashMap.get("username");
                     String Email=hashMap.get("Email");
-                    pbinding.tvUsernameprofile.setText(userName);
-                    pbinding.tvEmailprofile.setText(Email);
-
-
+                   tv_username.setText(userName);
+                   tv_email.setText(Email);
 
                 }
             }
@@ -66,6 +80,7 @@ public class Profile_view extends Fragment {
 
             }
         });
+
 
 
     }
