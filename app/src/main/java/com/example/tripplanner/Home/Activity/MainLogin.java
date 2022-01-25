@@ -47,7 +47,7 @@ public class MainLogin extends AppCompatActivity {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  checkcrededentails();
+                checkcrededentails();
             }
         });
 
@@ -60,16 +60,17 @@ public class MainLogin extends AppCompatActivity {
                       .setMessage("Enter your Email to get password reset link.")
                       .setPositiveButton("Reset", (dialogInterface, i) -> {
 
-                          /*
+
 
                           EditText email=view.findViewById(R.id.ed_resetpassword_login);
-                          if(email.getText().toString().isEmpty())
+                          String Email=email.getText().toString().trim();
+                          if(Email.isEmpty())
                           {
                               email.setError("Email field");
                               email.requestFocus();
                               return;
                           }
-                          auth.sendPasswordResetEmail(email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                          auth.sendPasswordResetEmail(Email).addOnSuccessListener(new OnSuccessListener<Void>() {
                               @Override
                               public void onSuccess(Void unused) {
                                   Toast.makeText(getApplicationContext(),"Reset Email send Check your Email",Toast.LENGTH_LONG).show();
@@ -120,18 +121,13 @@ public class MainLogin extends AppCompatActivity {
 
                 }
             });
-            /*
-            //signout
-            auth.getInstance().signout();
-            avtivity
-             */
-        });
+
+        }
 
     }
-        });
 
 
-    }
+
     private void showErorr(EditText text, String s) {
         text.setError(s);
         text.requestFocus();
@@ -144,5 +140,5 @@ public class MainLogin extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), Home.class));
             finish();
         }
-}
+        }
     }
