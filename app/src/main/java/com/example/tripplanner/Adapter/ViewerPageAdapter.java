@@ -1,5 +1,5 @@
 package com.example.tripplanner.Adapter;
-;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -9,7 +9,6 @@ import com.example.tripplanner.Home.Fragment.History_view;
 import com.example.tripplanner.Home.Fragment.Profile_view;
 import com.example.tripplanner.Home.Fragment.Upcomin_view;
 
-import java.util.List;
 
 public class ViewerPageAdapter extends FragmentStateAdapter {
 

@@ -1,5 +1,6 @@
 package com.example.tripplanner.Home.Fragment;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,15 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.tripplanner.Home.Activity.MainLogin;
 import com.example.tripplanner.R;
-import com.example.tripplanner.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +32,7 @@ public class Profile_view extends Fragment {
     TextView tv_username,tv_email;
     Button btnlogout;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +51,13 @@ public class Profile_view extends Fragment {
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 firebaseAuth.signOut();
                    startActivity(new Intent(getContext(),MainLogin.class));
                     getActivity().finish();
 
-
-
-
           }
+
         });
 
         return view;
@@ -69,7 +66,7 @@ public class Profile_view extends Fragment {
     public void setprofile(TextView tv_username, TextView tv_email)
     {
         user= firebaseAuth.getCurrentUser();
-        String userId=user.getUid();
+       String userId=user.getUid();
         databaseReference= FirebaseDatabase.getInstance().getReference("users").child(userId);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

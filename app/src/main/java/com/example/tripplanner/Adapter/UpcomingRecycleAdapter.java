@@ -12,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.tripplanner.R;
 import com.example.tripplanner.TripData.Trip;
 import com.example.tripplanner.TripData.Tripadd;
+
 
 import java.util.List;
 
@@ -42,6 +42,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
         return new  MyViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull UpcomingRecycleAdapter.MyViewHolder holder, int position) {
@@ -70,13 +71,16 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             }
         });
 
+
     }
+
 
 
     @Override
     public int getItemCount() {
         return tripList.size();
     }
+
 
 
 
@@ -93,6 +97,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
         public MyViewHolder(View itemView) {
             super(itemView);
+
                 tvName=itemView.findViewById(R.id.tv_nametrip);
                 tvStarttrip=itemView.findViewById(R.id.tv_starttrip);
                 tvEndtrip=itemView.findViewById(R.id.tv_endtrip);
@@ -103,6 +108,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             editNotes=itemView.findViewById(R.id.btn_editNote);
             btn_updatetrip=itemView.findViewById(R.id.btn_addtrip_update);
             btn_canceltrip=itemView.findViewById(R.id.btn_addtrip_cancel);
+
 
         }
 
