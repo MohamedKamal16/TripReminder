@@ -14,9 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tripplanner.R;
 import com.example.tripplanner.TripData.Trip;
+import com.example.tripplanner.R;
+import com.example.tripplanner.TripData.Trip;
 import com.example.tripplanner.TripData.Tripadd;
-
-
 import java.util.List;
 
 
@@ -46,12 +46,20 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
     @Override
     public void onBindViewHolder(@NonNull UpcomingRecycleAdapter.MyViewHolder holder, int position) {
-        Tripadd tripadd= (Tripadd) tripList.get(position);
+
+        Trip tripadd= (Trip) tripList.get(position);
         holder.tvName.setText(tripadd.getTripName());
         holder.tvEndtrip.setText(tripadd.getEndPoint());
         holder.tvStarttrip.setText(tripadd.getStartPoint());
-        holder.tvTime.setText(tripadd.getTimeTrip());
-        holder.tvDate.setText(tripadd.getDateTrip());
+        holder.tvTime.setText(tripadd.getTime());
+        holder.tvDate.setText(tripadd.getDate());
+        holder.start_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         holder.editNotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +79,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             }
         });
 
-
     }
 
 
@@ -83,16 +90,13 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
 
 
-
-
-
-
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvStarttrip, tvEndtrip, tvName, tvTime, tvDate;
         ImageView trip_img;
         ImageButton start_btn;
         ImageButton editNotes;
-        Button btn_updatetrip,btn_canceltrip;
+        ImageButton editNotes,btn_updatetrip,btn_canceltrip;
+
 
 
         public MyViewHolder(View itemView) {

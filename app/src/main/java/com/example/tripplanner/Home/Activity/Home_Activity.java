@@ -17,7 +17,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class Home extends AppCompatActivity {
+public class Home_Activity extends AppCompatActivity {
     /*Add[ViewPager2-TabLayout]
      * to make home shape*/
     public ViewPager2 viewPager;
