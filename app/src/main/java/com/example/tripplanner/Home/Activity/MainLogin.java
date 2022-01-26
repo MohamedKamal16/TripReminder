@@ -59,7 +59,7 @@ public class MainLogin extends AppCompatActivity {
                       .setMessage("Enter your Email to get password reset link.")
                       .setPositiveButton("Reset", (dialogInterface, i) -> {
 
-                          EditText email=view.findViewById(R.id.ed_resetpassword_login);
+                          EditText email=view.findViewById(R.id.ed_resetpasswordLogin);
                           if(email.getText().toString().isEmpty())
                           {
                               email.setError("Email field");
@@ -69,7 +69,6 @@ public class MainLogin extends AppCompatActivity {
 
                           auth.sendPasswordResetEmail(email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
 
-                          auth.sendPasswordResetEmail(Email).addOnSuccessListener(new OnSuccessListener<Void>() {
                               @Override
                               public void onSuccess(Void unused) {
                                   Toast.makeText(getApplicationContext(),"Reset Email send Check your Email",Toast.LENGTH_LONG).show();
@@ -79,11 +78,8 @@ public class MainLogin extends AppCompatActivity {
                               public void onFailure(@NonNull Exception e) {
                                   Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
 
-
                               }
                           });
-
-
 
 
                       }).setNegativeButton("Cancel",null)
