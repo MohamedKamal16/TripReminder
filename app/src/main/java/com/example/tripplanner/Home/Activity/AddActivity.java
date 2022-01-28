@@ -1,10 +1,12 @@
 package com.example.tripplanner.Home.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.tripplanner.Home.Fragment.AddNoteFragment;
 import com.example.tripplanner.Home.Fragment.FragmentAddTrip;
@@ -25,6 +27,7 @@ public class AddActivity extends AppCompatActivity {
         //get key and id from Bundle
         Bundle bundle = getIntent().getExtras();
         key = bundle.getInt("KEY");
+        ID=bundle.getInt("ID");
 
 // condition to show note and add on switch fragment use key as flag
         if (key == 3) {
@@ -47,4 +50,12 @@ public class AddActivity extends AppCompatActivity {
         }
 
     }
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getSupportFragmentManager().putFragment(outState, "myFragmentName", fragment);
+        Log.i(FragmentAddTrip.TAG, "onSaveInstanceState:Ac ");
+    }
+
+
 }

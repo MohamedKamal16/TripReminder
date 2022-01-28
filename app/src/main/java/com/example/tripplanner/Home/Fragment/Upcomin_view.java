@@ -43,22 +43,29 @@ public class Upcomin_view extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tripViewModel=new ViewModelProvider(this).get(TripViewModel.class);
-         new LoadRoomData().execute();
         Log.i(Final.LOG_TAG, "onViewCreatedUpcoming");
         tripRecycleView = view.findViewById(R.id.trip_recycleView);
+        upcomingRecycleAdapter = new UpcomingRecycleAdapter(tripsList, getContext(), getActivity());
         floatingBtnAdd = view.findViewById(R.id.add_flout_btn);
         addTrip();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_upcomingtrips, container, false);
+       View view= inflater.inflate(R.layout.fragment_upcomingtrips, container, false);
+        tripViewModel=new ViewModelProvider(this).get(TripViewModel.class);
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        new addTripRoom().execute();
     }
 
     private void addTrip() {
         floatingBtnAdd.setOnClickListener(v -> {
-            //intent to move from fragment to activity
             Intent intent = new Intent(getContext(), AddActivity.class);
             Bundle bundle = new Bundle();
             bundle.putInt("KEY", 1);
@@ -68,7 +75,7 @@ public class Upcomin_view extends Fragment {
         });
     }
 
-    private class LoadRoomData extends AsyncTask<Void, Void, List<Trip>> {
+    private class addTripRoom extends AsyncTask<Void, Void, List<Trip>> {
 
         @Override
         protected List<Trip> doInBackground(Void...voids) {
