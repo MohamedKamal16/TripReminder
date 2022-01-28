@@ -6,7 +6,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,9 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tripplanner.R;
 import com.example.tripplanner.TripData.Trip;
-import com.example.tripplanner.R;
-import com.example.tripplanner.TripData.Trip;
-import com.example.tripplanner.TripData.Tripadd;
+
 import java.util.List;
 
 
@@ -70,11 +67,13 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             @Override
             public void onClick(View v) {
 
+
             }
         });
         holder.btn_updatetrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
             }
         });
@@ -95,9 +94,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         ImageView trip_img;
         ImageButton start_btn;
         ImageButton editNotes,btn_updatetrip,btn_canceltrip;
-
-
-
         public MyViewHolder(View itemView) {
             super(itemView);
 

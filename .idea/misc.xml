@@ -23,6 +23,7 @@
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_main_notification.xml" value="0.18854166666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_main_register.xml" value="0.18854166666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_main_splash.xml" value="0.25" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/background.xml" value="0.20416666666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_add_note.xml" value="0.2" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_add_trip.xml" value="0.25" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_history.xml" value="0.18854166666666666" />
@@ -32,6 +33,7 @@
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/note_row.xml" value="0.20416666666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/resetpassword.xml" value="0.1956521739130435" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/trip_upcoming_card.xml" value="0.5" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/warning_dialog.xml" value="0.25" />
         <entry key="..\:/TripReminder/app/src/main/res/drawable/button_shape.xml" value="0.15555555555555556" />
         <entry key="..\:/TripReminder/app/src/main/res/drawable/ic_google.xml" value="0.1" />
         <entry key="..\:/TripReminder/app/src/main/res/drawable/input_register.xml" value="0.1" />
