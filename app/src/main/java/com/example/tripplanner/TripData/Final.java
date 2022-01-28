@@ -13,6 +13,7 @@ public interface Final {
     String MISSED_TRIP_STATUS = "Missed";
     String UPCOMING_TRIP_STATUS = "upcoming";
     String FINISHED_TRIP_STATUS = "finished";
+    String CANCEL_TRIP_STATUS = "cancel";
     String API_KEY = "AIzaSyBpK-AM55wLemXfm-ffY9IpHA3MkF5vd0M";
     String APP_NAME = "TripPlanner";
     String DIALOG_CONFIRM = "Confirm";
@@ -20,6 +21,7 @@ public interface Final {
     String DIALOG_OK = "Ok";
     String DIALOG_SNOOZE = "Snooze";
     String DIALOG_START = "Start";
+
 
 }
 

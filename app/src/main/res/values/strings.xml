@@ -46,4 +46,16 @@
     <string name="btn_addtrip_update">Update</string>
     <string name="btn_addtrip_cancel">Cancel</string>
 
+<<<<<<< Updated upstream
+=======
+    <string name="SaveNotes">SaveNotes</string>
+    <string name="tv_date_hisrory">tv_date_histroy</string>
+    <string name="tv_nametrip_histroy">tv_nametrip_histroy</string>
+    <string name="tv_startpoint_histroy">tv_startpoint_histroy</string>
+    <string name="tv_endpointTrip_history">tv_endpointTrip_history</string>
+    <string name="tv_time_histroy">tv_time_histroy</string>
+    <string name="tv_status_histroy">tv_status_histroy</string>
+
+
+>>>>>>> Stashed changes
 </resources>

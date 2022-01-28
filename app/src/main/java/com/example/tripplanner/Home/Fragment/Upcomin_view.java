@@ -36,7 +36,11 @@ public class Upcomin_view extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+<<<<<<< Updated upstream
 
+=======
+        Log.i(Final.LOG_TAG, "onViewCreatedUpcoming");
+>>>>>>> Stashed changes
         tripRecycleView = view.findViewById(R.id.trip_recycleView);
         upcomingRecycleAdapter = new UpcomingRecycleAdapter(tripsList, getContext(), getActivity());
         floatingBtnAdd = view.findViewById(R.id.add_flout_btn);
@@ -46,10 +50,20 @@ public class Upcomin_view extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_upcomingtrips, container, false);
+       View view= inflater.inflate(R.layout.fragment_upcomingtrips, container, false);
+        tripViewModel=new ViewModelProvider(this).get(TripViewModel.class);
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        new addTripRoom().execute();
     }
 
     private void addTrip() {
+<<<<<<< Updated upstream
         floatingBtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,5 +78,18 @@ public class Upcomin_view extends Fragment {
         });
     }
 
+=======
+        floatingBtnAdd.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AddActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("KEY", 1);
+            bundle.putInt("ID", -1);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        });
+    }
+
+    private class addTripRoom extends AsyncTask<Void, Void, List<Trip>> {
+>>>>>>> Stashed changes
 
 }

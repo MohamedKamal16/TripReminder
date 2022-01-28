@@ -91,10 +91,14 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         TextView tvStarttrip, tvEndtrip, tvName, tvTime, tvDate;
         ImageView trip_img;
         ImageButton start_btn;
+<<<<<<< Updated upstream
         ImageButton editNotes;
         Button btn_updatetrip,btn_canceltrip;
 
 
+=======
+        ImageButton editNotes,btn_updatetrip,btn_canceltrip;
+>>>>>>> Stashed changes
         public MyViewHolder(View itemView) {
             super(itemView);
 
