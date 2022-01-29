@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
-import android.window.SplashScreen;
 
-import com.example.tripplanner.MainActivity;
 import com.example.tripplanner.R;
 
 public class MainSplash extends AppCompatActivity {
@@ -24,7 +22,7 @@ public class MainSplash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainSplash.this, Home.class);
+                Intent intent = new Intent(MainSplash.this, Home_Activity.class);
 
                 //Intent is used to switch from one activity to another.
 

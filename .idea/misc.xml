@@ -14,6 +14,8 @@
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/layout/fragment_upcoming_main__home.xml" value="0.21105072463768115" />
         <entry key="..\:/Files/Android/project/Trip/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2703125" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/drawable-v24/ic_clock.xml" value="0.2203125" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/drawable/ic_google.xml" value="0.19074074074074074" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/drawable/ic_update.xml" value="0.19074074074074074" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_add.xml" value="0.18432971014492755" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_addtrip.xml" value="0.18854166666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_home.xml" value="0.22" />
@@ -21,13 +23,17 @@
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_main_notification.xml" value="0.18854166666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_main_register.xml" value="0.18854166666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_main_splash.xml" value="0.25" />
-        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_add_note.xml" value="0.182518115942029" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/background.xml" value="0.20416666666666666" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_add_note.xml" value="0.2" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_add_trip.xml" value="0.25" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_history.xml" value="0.18854166666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_upcoming.xml" value="0.15307971014492755" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_upcomingtrips.xml" value="0.18854166666666666" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/note_row.xml" value="0.20416666666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/resetpassword.xml" value="0.1956521739130435" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/trip_upcoming_card.xml" value="0.5" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/warning_dialog.xml" value="0.25" />
         <entry key="..\:/TripReminder/app/src/main/res/drawable/button_shape.xml" value="0.15555555555555556" />
         <entry key="..\:/TripReminder/app/src/main/res/drawable/ic_google.xml" value="0.1" />
         <entry key="..\:/TripReminder/app/src/main/res/drawable/input_register.xml" value="0.1" />
@@ -38,11 +44,9 @@
         <entry key="..\:/TripReminder/app/src/main/res/layout/fragment_history.xml" value="0.18" />
         <entry key="..\:/TripReminder/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/TripReminder/app/src/main/res/layout/fragmentaddtrip.xml" value="0.18958333333333333" />
-<<<<<<< Updated upstream
 
-=======
         <entry key="..\:/TripReminder/app/src/main/res/layout/history_trips_card.xml" value="0.33" />
->>>>>>> Stashed changes
+
         <entry key="..\:/TripReminder/app/src/main/res/layout/resetpassword.xml" value="0.2" />
         <entry key="..\:/TripReminder/app/src/main/res/layout/trip_upcoming_card.xml" value="0.33" />
         <entry key="..\:/Users/asus/Downloads/TripReminder/app/src/main/res/layout/fragment_history.xml" value="0.18958333333333333" />
@@ -50,7 +54,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

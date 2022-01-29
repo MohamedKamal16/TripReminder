@@ -4,16 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
-
-import com.example.tripplanner.Home.Activity.Home;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*room deal with @ annoitation this class like column in Table*/
 @Entity //this class room table if want to change table name (tableName = "Name")
 
 @TypeConverters(DataConverter.class)
-public class Trip {
+public class Trip implements Serializable {
     @NonNull
     private String userID;
     @NonNull

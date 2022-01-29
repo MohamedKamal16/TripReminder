@@ -3,16 +3,12 @@ package com.example.tripplanner.Home.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.CharacterPickerDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.tripplanner.R;
 import com.example.tripplanner.databinding.ActivityMainLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +23,8 @@ public class MainLogin extends AppCompatActivity {
     FirebaseAuth auth;
     AlertDialog.Builder resetalert;
     LayoutInflater inflater;
+    String resetPasswoed;
+    EditText email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +35,7 @@ public class MainLogin extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         resetalert= new AlertDialog.Builder(MainLogin.this);
         inflater=this.getLayoutInflater();
+
 
 
         binding.tvLoginSignup.setOnClickListener(new View.OnClickListener() {
@@ -63,32 +62,27 @@ public class MainLogin extends AppCompatActivity {
                       .setMessage("Enter your Email to get password reset link.")
                       .setPositiveButton("Reset", (dialogInterface, i) -> {
 
-
-
-                          EditText email=view.findViewById(R.id.ed_resetpassword_login);
-                          String Email=email.getText().toString().trim();
-                          if(Email.isEmpty())
+                          EditText email=view.findViewById(R.id.ed_resetpasswordLogin);
+                          if(email.getText().toString().isEmpty())
                           {
                               email.setError("Email field");
                               email.requestFocus();
                               return;
                           }
-                          auth.sendPasswordResetEmail(Email).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                          auth.sendPasswordResetEmail(email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+
                               @Override
                               public void onSuccess(Void unused) {
                                   Toast.makeText(getApplicationContext(),"Reset Email send Check your Email",Toast.LENGTH_LONG).show();
-
                               }
                           }).addOnFailureListener(new OnFailureListener() {
                               @Override
                               public void onFailure(@NonNull Exception e) {
                                   Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
 
-
                               }
                           });
-
-
 
 
                       }).setNegativeButton("Cancel",null)
@@ -155,7 +149,7 @@ public class MainLogin extends AppCompatActivity {
             auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-                    startActivity(new Intent(getApplicationContext(), Home.class));
+                    startActivity(new Intent(getApplicationContext(), Home_Activity.class));
                     finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -181,7 +175,7 @@ public class MainLogin extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), Home.class));
+            startActivity(new Intent(getApplicationContext(), Home_Activity.class));
             finish();
         }
         }

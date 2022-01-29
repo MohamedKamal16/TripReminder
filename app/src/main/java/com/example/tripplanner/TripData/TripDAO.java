@@ -11,7 +11,7 @@ import java.util.List;
 public interface TripDAO {
 
     @Insert
-    long insert(Trip trip);
+    void insert(Trip trip);
 
     @Delete
     void delete(Trip trip);
@@ -38,11 +38,11 @@ public interface TripDAO {
     List<Trip> selectUpcomingTrip(String userId, String status);
 
     @Query("UPDATE Trip SET tripStatus = :tripStatus WHERE id = :id And userID= :userId")
-    int updateTripStatus(String userId, int id, String tripStatus);
+    void updateTripStatus(String userId, int id, String tripStatus);
 
     @Query("UPDATE Trip SET tripName = :tripName , startPoint =:startPoint , endPoint =:endPoint , endPointLatitude=:endPointLat, endPointLongitude=:endPointLong," +
             " date =:date , time=:time, calendar=:calendar WHERE id = :id")
-    int EditTrip(int id, String tripName,String startPoint,String endPoint,double endPointLat,double endPointLong,String date,String time,double calendar);
+    void EditTrip(int id, String tripName,String startPoint,String endPoint,double endPointLat,double endPointLong,String date,String time,double calendar);
 
 
     @Query("SELECT COUNT(*) FROM Trip WHERE userId  = :userId And tripStatus LIKE :status" )
@@ -55,7 +55,7 @@ public interface TripDAO {
     void deleteHistoryById(String userId,String status,String status1,String status2);
 
     @Query("UPDATE Trip SET notes = :notes WHERE id = :id")
-    int EditNotes(int id, String notes);
+    void EditNotes(int id, String notes);
 }
 
 
