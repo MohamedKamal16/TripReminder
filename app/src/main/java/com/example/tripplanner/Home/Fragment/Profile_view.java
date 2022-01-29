@@ -20,17 +20,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
-import java.util.Map;
+
 
 public class Profile_view extends Fragment {
     FirebaseUser user;
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
-
     TextView tv_username,tv_email;
-    Button btnlogout;
+    Button btnlogout,btnSync;
 
 
     @Override
@@ -47,22 +45,29 @@ public class Profile_view extends Fragment {
         tv_username=view.findViewById(R.id.tvUsernameprofile);
         tv_email=view.findViewById(R.id.tvEmailprofile);
         btnlogout=view.findViewById(R.id.buttonOut);
-            setprofile(tv_username,tv_email);
+        btnSync=view.findViewById(R.id.btnSync);
+        setprofile(tv_username,tv_email);
+
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 firebaseAuth.signOut();
                    startActivity(new Intent(getContext(),MainLogin.class));
                     getActivity().finish();
-
           }
 
         });
+        btnSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+
+            }
+        });
         return view;
-
     }
+
     public void setprofile(TextView tv_username, TextView tv_email)
     {
         user= firebaseAuth.getCurrentUser();
@@ -81,12 +86,9 @@ public class Profile_view extends Fragment {
 
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
              //   Toast.makeText(Profile_view.this,"Erorr No data on to profile");
-
 
             }
         });

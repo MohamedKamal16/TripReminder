@@ -3,6 +3,8 @@ package com.example.tripplanner.Home.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,7 +37,6 @@ public class MainLogin extends AppCompatActivity {
         inflater=this.getLayoutInflater();
 
 
-
         binding.tvLoginSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +53,7 @@ public class MainLogin extends AppCompatActivity {
 
         binding.tvLoginForgitpasss.setOnClickListener(new View.OnClickListener() {
             @Override
+<<<<<<< Updated upstream
             public void onClick(View view) {
 
                 View view1=inflater.inflate(R.layout.resetpassword,null);
@@ -86,10 +88,49 @@ public class MainLogin extends AppCompatActivity {
                      .setView(view1)
                       .create()
                       .show();
+=======
+            public void onClick(View v) {
+                EditText resetMail = new EditText(v.getContext());
+                AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+                passwordResetDialog.setTitle("Rest password?");
+                passwordResetDialog.setMessage("Enter your mail to receive reset link");
+                passwordResetDialog.setView(resetMail);
+                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //resetemail
+                        String mail = resetMail.getText().toString();
+                        auth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(getApplicationContext(), "Check your Email", Toast.LENGTH_LONG).show();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Erorr ! resend email agin" + e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                passwordResetDialog.create().show();
+>>>>>>> Stashed changes
 
             }
         });
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
     }
 
     private void checkcrededentails() {
