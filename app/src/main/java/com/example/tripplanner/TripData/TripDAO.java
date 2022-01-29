@@ -4,21 +4,22 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.TypeConverter;
 
+import com.example.tripplanner.TripData.Trip;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public interface TripDAO {
 
     @Insert
-    void insert(Trip trip);
-
+    long insert(Trip trip);
     @Delete
     void delete(Trip trip);
-
     @Query("DELETE FROM Trip")
     void clear();
-
     @Query("DELETE FROM Trip where id=:id AND userID= :userId ")
     void deleteById(String userId, int id);
 
@@ -38,12 +39,14 @@ public interface TripDAO {
     List<Trip> selectUpcomingTrip(String userId, String status);
 
     @Query("UPDATE Trip SET tripStatus = :tripStatus WHERE id = :id And userID= :userId")
-    void updateTripStatus(String userId, int id, String tripStatus);
+    int updateTripStatus(String userId, int id, String tripStatus);
 
     @Query("UPDATE Trip SET tripName = :tripName , startPoint =:startPoint , endPoint =:endPoint , endPointLatitude=:endPointLat, endPointLongitude=:endPointLong," +
             " date =:date , time=:time, calendar=:calendar WHERE id = :id")
-    void EditTrip(int id, String tripName,String startPoint,String endPoint,double endPointLat,double endPointLong,String date,String time,double calendar);
+    int EditTrip(int id, String tripName,String startPoint,String endPoint,double endPointLat,double endPointLong,String date,String time,double calendar);
 
+    @Query("UPDATE Trip SET notes = :notes WHERE id = :id")
+    int EditNotes(int id, String notes);
 
     @Query("SELECT COUNT(*) FROM Trip WHERE userId  = :userId And tripStatus LIKE :status" )
     int getCountTripType(String userId ,String status);
@@ -53,10 +56,4 @@ public interface TripDAO {
 
     @Query("DELETE FROM Trip where userID= :userId AND( tripStatus = :status OR tripStatus = :status1 OR tripStatus = :status2 ) ")
     void deleteHistoryById(String userId,String status,String status1,String status2);
-
-    @Query("UPDATE Trip SET notes = :notes WHERE id = :id")
-    void EditNotes(int id, String notes);
 }
-
-
-

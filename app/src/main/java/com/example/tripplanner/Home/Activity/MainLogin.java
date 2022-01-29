@@ -3,6 +3,7 @@ package com.example.tripplanner.Home.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,7 +38,6 @@ public class MainLogin extends AppCompatActivity {
         inflater=this.getLayoutInflater();
 
 
-
         binding.tvLoginSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,45 +52,7 @@ public class MainLogin extends AppCompatActivity {
             }
         });
 
-<<<<<<< Updated upstream
-        binding.tvLoginForgitpasss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                View view1=inflater.inflate(R.layout.resetpassword,null);
-              resetalert.setTitle("Reset Forget Password?")
-                      .setMessage("Enter your Email to get password reset link.")
-                      .setPositiveButton("Reset", (dialogInterface, i) -> {
-
-                          EditText email=view.findViewById(R.id.ed_resetpasswordLogin);
-                          if(email.getText().toString().isEmpty())
-                          {
-                              email.setError("Email field");
-                              email.requestFocus();
-                              return;
-                          }
-
-                          auth.sendPasswordResetEmail(email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-
-                              @Override
-                              public void onSuccess(Void unused) {
-                                  Toast.makeText(getApplicationContext(),"Reset Email send Check your Email",Toast.LENGTH_LONG).show();
-                              }
-                          }).addOnFailureListener(new OnFailureListener() {
-                              @Override
-                              public void onFailure(@NonNull Exception e) {
-                                  Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
-
-                              }
-                          });
-
-
-                      }).setNegativeButton("Cancel",null)
-                     .setView(view1)
-                      .create()
-                      .show();
-=======
-
+      
 
         binding.tvLoginForgitpasss.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,13 +88,9 @@ public class MainLogin extends AppCompatActivity {
                     }
                 });
                 passwordResetDialog.create().show();
->>>>>>> Stashed changes
 
             }
         });
-
-
-        //
 
     }
 

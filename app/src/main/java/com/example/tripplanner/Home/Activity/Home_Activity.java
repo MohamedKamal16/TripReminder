@@ -42,59 +42,6 @@ public class Home_Activity extends AppCompatActivity {
     }
 
 
-
-
-
-/*
-    public void initAlarm(Trip trip) {
-        Intent notifyIntent = new Intent(this, //TODO AlarmReceiver.class
-                 );
-        notifyIntent.putExtra(Final.TRIP_NAME, trip.getTripName());
-        notifyIntent.putExtra(Final.TRIP_ID, trip.getId());
-        notifyIntent.putExtra(Final.TRIP_USER_ID, trip.getUserID());
-        notifyIntent.putExtra(Final.TRIP_LATITUDE, trip.getEndPointLatitude());
-        notifyIntent.putExtra(Final.TRIP_LONGITUDE, trip.getEndPointLongitude());
-
-        PendingIntent notifyPendingIntent = PendingIntent.getBroadcast
-                (this, trip.getId(), notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, trip.getCalendar(), notifyPendingIntent);
-    }
-*/
-
-/*
-    private class registerAlarm extends AsyncTask<Void, Void, List<Trip>> {
-
-        @Override
-        protected List<Trip> doInBackground(Void... voids) {
-            return Home.database.tripDAO().selectUpcomingTrip(Home.fireBaseUseerId, "upcoming");
-        }
-
-        @Override
-        protected void onPostExecute(List<Trip> trips) {
-            super.onPostExecute(trips);
-            for (int i = 0; i < trips.size(); i++) {
-                if (trips.get(i).getTripStatus().equals("upcoming")) {
-                    if (Calendar.getInstance().getTimeInMillis() > trips.get(i).getCalendar()) {
-                        int finalI = i;
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Home.database.tripDAO().updateTripStatus(Home.fireBaseUseerId,trips.get(finalI).getId(), Final.MISSED_TRIP_STATUS);
-                            }
-                        }).start();
-                    } else {
-                        initAlarm(trips.get(i));
-                    }
-                }
-            }
-            viewPager.getAdapter().notifyDataSetChanged();
-        }
-    }
-*/
-
-
-
     private void initComponent() {
         TabLayout tabLayout = findViewById(R.id.main_home_tabLayout);
         viewPager = findViewById(R.id.main_home_pager);
