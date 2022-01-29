@@ -17,7 +17,6 @@ import com.example.tripplanner.Home.Activity.Home_Activity;
 import com.example.tripplanner.R;
 import com.example.tripplanner.TripData.Final;
 import com.example.tripplanner.TripData.Trip;
-
 import java.util.List;
 
 public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.HistoryViewHolder> {
@@ -35,8 +34,8 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
     @Override
     public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.history_trips_card,parent,false);
-
         return new HistoryTripAdapter.HistoryViewHolder(view);
+
     }
 
     @Override
@@ -57,6 +56,7 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
         });
 
 
+
     }
 
     @Override
@@ -69,6 +69,7 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
     TextView tvstartpoint,tvendpoint,tvstatus,tvdate,tvtime,tvNametrip;
     ImageButton btndelet;
 
+
     public HistoryViewHolder(@NonNull View itemView) {
         super(itemView);
         tvdate=itemView.findViewById(R.id.tv_date_history);
@@ -79,8 +80,9 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
         tvNametrip=itemView.findViewById(R.id.tv_nametrip_histroy);
         btndelet=itemView.findViewById(R.id.btn_delethitory);
     }
-}
+    }
 
+    
     public void deleteWarnDialog(Trip trip , int position){
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
         View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog,(ConstraintLayout) activity.findViewById(R.id.dialogLayoutContainer));

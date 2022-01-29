@@ -12,6 +12,7 @@ public interface Final {
     String NOTIFICATION_CHANNEL_ID = "trips";
     String UPCOMING_TRIP_STATUS = "upcoming";
     String FINISHED_TRIP_STATUS = "finished";
+    String CANCEL_TRIP_STATUS = "cancel";
     String API_KEY = "AIzaSyBpK-AM55wLemXfm-ffY9IpHA3MkF5vd0M";
     String APP_NAME = "TripPlanner";
     //////////////////////////////////////////////////////////////
@@ -22,11 +23,5 @@ public interface Final {
     String DIALOG_START = "Start";
     String MISSED_TRIP_STATUS = "Missed";
 
-<<<<<<< Updated upstream
-=======
-/*Cancel
-* upcoming
-* */
->>>>>>> Stashed changes
 }
 

@@ -32,11 +32,6 @@ public class Upcomin_view extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-<<<<<<< Updated upstream
-        Log.i(Final.LOG_TAG, "onViewCreatedUpcoming");
-=======
-
->>>>>>> Stashed changes
         tripRecycleView = view.findViewById(R.id.trip_recycleView);
         upcomingRecycleAdapter = new UpcomingRecycleAdapter(tripsList, getContext(), getActivity());
         floatingBtnAdd = view.findViewById(R.id.add_flout_btn);
@@ -59,6 +54,7 @@ public class Upcomin_view extends Fragment {
     }
 
     private void addTrip() {
+
         floatingBtnAdd.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), AddActivity.class);
             Bundle bundle = new Bundle();
@@ -69,7 +65,10 @@ public class Upcomin_view extends Fragment {
         });
     }
 
+   
+
     private class addTripRoom extends AsyncTask<Void, Void, List<Trip>> {
+
 
         @Override
         protected List<Trip> doInBackground(Void...voids) {

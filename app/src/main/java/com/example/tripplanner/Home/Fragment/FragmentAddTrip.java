@@ -269,42 +269,6 @@ public class FragmentAddTrip extends Fragment {
 
     //Date
     public void calenderDate(TextView textViewDate1, int check, Calendar incomingCal) {
-<<<<<<< Updated upstream
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                int choosenyear;
-                int choosenMonth;
-                int choosenDay;
-                month = month + 1;
-                String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-
-                Log.i(Final.LOG_TAG,date);
-
-                if(check == 1) {
-                    String[] dateTotal = date.split("-");
-                    choosenyear = Integer.valueOf(dateTotal[2]);
-                    choosenMonth = Integer.valueOf(dateTotal[1]);
-                    choosenDay = Integer.valueOf(dateTotal[0]);
-                }
-                else{
-                    String oneTripDate = tvDate.getText().toString();
-                    String[] oneTripDateSplits = oneTripDate.split("-");
-                    choosenyear = Integer.valueOf(oneTripDateSplits[2]);
-                    choosenMonth = Integer.valueOf(oneTripDateSplits[1]);
-                    choosenDay = Integer.valueOf(oneTripDateSplits[0]);
-                }
-                if(year == choosenyear && month == choosenMonth && day== choosenDay){
-                    if(check==1)
-                        isDateToday=true;
-                    else
-                        isDateTodayRoundTrip=true;
-                }else{
-                    if(check==1)
-                        isDateToday=false;
-                    else
-                        isDateTodayRoundTrip=false;
-=======
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (datePicker, year, month, day) -> {
             int nowYear;
             int nowMonth;
@@ -343,7 +307,7 @@ public class FragmentAddTrip extends Fragment {
                     isDateCorrect = true;
                 } else {
                     isDateCorrectRoundTrip = true;
->>>>>>> Stashed changes
+
                 }
                 //calender
                 incomingCal.set(Calendar.DAY_OF_MONTH,day);
@@ -482,13 +446,10 @@ public class FragmentAddTrip extends Fragment {
         timePickerDialog.show();
     }
 
-<<<<<<< Updated upstream
+
     public void sharedPrefernceSaveData(){
-=======
-    //TODO Handle SharedPreference
-    public void writeSp(){
->>>>>>> Stashed changes
         SharedPreferences.Editor editor= sharedPreferences.edit();
+
         editor.putLong("CalendarNormal",calenderNormal.getTimeInMillis());
         editor.putLong("CalendarRound",calendarRound.getTimeInMillis());
         editor.apply();
@@ -510,24 +471,6 @@ public class FragmentAddTrip extends Fragment {
 
                             //when edit trip
                             if(AddActivity.key==2){
-<<<<<<< Updated upstream
-                                        if (placeEndPoint==null) {
-                                       /* Home_Activity.database.tripDAO().*/
-                                            tripViewModel.EditTrip(AddActivity.ID, etTripName.getText().toString(), etStartPoint.getText().toString(),
-                                                    etEndPoint.getText().toString(), selectedTrip.getEndPointLatitude(),
-                                                    selectedTrip.getEndPointLongitude(), tvDate.getText().toString(), tvTime.getText().toString(),calenderNormal.getTimeInMillis());
-                                            getActivity().finish();
-                                            Log.i(TAG, "run: place end null");
-                                        }else {
-                                           /* Home_Activity.database.tripDAO().*/
-                                            tripViewModel.EditTrip(AddActivity.ID, etTripName.getText().toString(), etStartPoint.getText().toString(),
-                                                    etEndPoint.getText().toString(), placeEndPoint.getLatLng().latitude
-                                                    , placeEndPoint.getLatLng().longitude, tvDate.getText().toString(), tvTime.getText().toString(),calenderNormal.getTimeInMillis());
-                                            getActivity().finish();
-                                            Log.i(TAG, "run: place end  not null");
-                                        }
-=======
-
                                 new Thread(() -> {
                                     if (placeEndPoint==null) {
                                           Home_Activity.database.tripDAO().EditTrip(AddActivity.ID,
@@ -542,7 +485,6 @@ public class FragmentAddTrip extends Fragment {
                                            }
                                     getActivity().finish();
                                 }).start();
->>>>>>> Stashed changes
                                 return;
                             }
                             // add trip object
@@ -561,15 +503,13 @@ public class FragmentAddTrip extends Fragment {
                                             Trip tripRound = new Trip(Home_Activity.fireBaseUserId, etTripName.getText().toString() + " Round", placeEndPoint.getName(), placeEndPoint.getLatLng().latitude, placeEndPoint.getLatLng().longitude,
                                                     placeStartPoint.getName(), placeStartPoint.getLatLng().latitude, placeStartPoint.getLatLng().longitude,
                                                     tvRoundDate.getText().toString(), tvRoundTime.getText().toString(),
+
                                                     "upcoming", sharedPreferences.getLong("CalendarRound", 0), resultNotes);
-<<<<<<< Updated upstream
-                                          tripViewModel.insert(trip);
-                                          tripViewModel.insert(tripRound);
-=======
+
 
                                             insertRoom(trip);
                                             insertRoom(tripRound);
->>>>>>> Stashed changes
+
                                             getActivity().finish();
                                         } else {
                                             tvRoundTime.setError("Valid Time");
@@ -581,11 +521,8 @@ public class FragmentAddTrip extends Fragment {
                                     }
                                 }
                                 else {
-<<<<<<< Updated upstream
-                                    tripViewModel.insert(trip);
-=======
+
                                     insertRoom(trip);
->>>>>>> Stashed changes
                                     getActivity().finish();
                                 }
                             }
@@ -603,13 +540,10 @@ public class FragmentAddTrip extends Fragment {
                                             Trip tripRound = new Trip(Home_Activity.fireBaseUserId, etTripName.getText().toString() + " Round", placeEndPoint.getName(), placeEndPoint.getLatLng().latitude, placeEndPoint.getLatLng().longitude,
                                                     placeStartPoint.getName(), placeStartPoint.getLatLng().latitude, placeStartPoint.getLatLng().longitude,
                                                     tvRoundDate.getText().toString(), tvRoundTime.getText().toString(),"upcoming", calendarRound.getTimeInMillis(), null);
-<<<<<<< Updated upstream
-                                            tripViewModel.insert(trip);
-                                            tripViewModel.insert(tripRound);
-=======
+
                                             insertRoom(trip);
                                             insertRoom(tripRound);
->>>>>>> Stashed changes
+
                                             getActivity().finish();
 
                                         } else {
@@ -706,15 +640,7 @@ public class FragmentAddTrip extends Fragment {
     private static final int ENDPOINTFlag = 2;
     Place placeStartPoint;
     Place placeEndPoint;
-<<<<<<< Updated upstream
-    //deal with room database
-    TripViewModel tripViewModel;
-    public static final String TAG = "AddTripFragment";
-    ///////////////////////////////////////////////////////////////
-=======
 
-
->>>>>>> Stashed changes
     Calendar calender = Calendar.getInstance();
     final int year = calender.get(Calendar.YEAR);
     final int month = calender.get(Calendar.MONTH);
@@ -723,7 +649,6 @@ public class FragmentAddTrip extends Fragment {
     Calendar calenderNormal;
     Calendar calendarRound;
     public static final String PREF_NAME="MY_PREF";
-
     boolean isDateCorrect = false;
     boolean isTimeCorrect = false;
     boolean isDateToday=false;
@@ -741,7 +666,6 @@ public class FragmentAddTrip extends Fragment {
     public void insertRoom(Trip trip) {
         new Thread(() -> Home_Activity.database.tripDAO().insert(trip)).start();
     }
-
 
     //get data from room
     private class getRoomData extends AsyncTask<Void, Void, Trip> {
