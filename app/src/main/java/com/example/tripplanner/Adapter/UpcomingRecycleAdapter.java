@@ -93,7 +93,10 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         TextView tvStarttrip, tvEndtrip, tvName, tvTime, tvDate;
         ImageView trip_img;
         ImageButton start_btn;
+
+
         ImageButton editNotes,btn_updatetrip,btn_canceltrip;
+
         public MyViewHolder(View itemView) {
             super(itemView);
 

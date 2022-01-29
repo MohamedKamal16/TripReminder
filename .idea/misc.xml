@@ -41,11 +41,16 @@
         <entry key="..\:/TripReminder/app/src/main/res/layout/activity_main_notification.xml" value="0.18958333333333333" />
         <entry key="..\:/TripReminder/app/src/main/res/layout/activity_main_register.xml" value="0.25" />
         <entry key="..\:/TripReminder/app/src/main/res/layout/fragment_add_trip.xml" value="0.22" />
-        <entry key="..\:/TripReminder/app/src/main/res/layout/fragment_history.xml" value="0.18958333333333333" />
+        <entry key="..\:/TripReminder/app/src/main/res/layout/fragment_history.xml" value="0.18" />
         <entry key="..\:/TripReminder/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/TripReminder/app/src/main/res/layout/fragmentaddtrip.xml" value="0.18958333333333333" />
+
+        <entry key="..\:/TripReminder/app/src/main/res/layout/history_trips_card.xml" value="0.33" />
+
         <entry key="..\:/TripReminder/app/src/main/res/layout/resetpassword.xml" value="0.2" />
         <entry key="..\:/TripReminder/app/src/main/res/layout/trip_upcoming_card.xml" value="0.33" />
+        <entry key="..\:/Users/asus/Downloads/TripReminder/app/src/main/res/layout/fragment_history.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/asus/Downloads/TripReminder/app/src/main/res/layout/history_trips_card.xml" value="0.33" />
       </map>
     </option>
   </component>
