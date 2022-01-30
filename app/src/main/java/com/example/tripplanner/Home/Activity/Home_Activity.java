@@ -35,7 +35,7 @@ public class Home_Activity extends AppCompatActivity {
         fireBaseEmail=FirebaseAuth.getInstance().getCurrentUser().getEmail();
         fireBaseUserPhotoUri=FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl();
         //initalize DB
-        database = Room.databaseBuilder(this, TripDatabase.class, "tripDB").build();
+        database = Room.databaseBuilder(this, TripDatabase.class, "Trip").build();
         setContentView(R.layout.activity_home);
         initComponent();
 

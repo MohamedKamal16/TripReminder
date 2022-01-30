@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /*room deal with @ annoitation this class like column in Table*/
-@Entity //this class room table if want to change table name (tableName = "Name")
+
+@Entity //this class name is name of room table if want to change table name (tableName = "Name")
 
 @TypeConverters(DataConverter.class)
 public class Trip implements Serializable {
@@ -35,21 +36,20 @@ public class Trip implements Serializable {
     private String date;
     @NonNull
     private String time;
-
     @NonNull
     private String tripStatus;
 
     private ArrayList<String> notes;
-
     @NonNull
     private long calendar;
 
     public Trip(@NonNull String userID, @NonNull String tripName, @NonNull String startPoint,@NonNull double startPointLat, @NonNull double startPointLong,
                 @NonNull String endPoint, @NonNull double endPointLat, @NonNull double endPointLong,
-                @NonNull String date, @NonNull String time, String tripStatus, @NonNull long calendar,ArrayList<String> notes) {
+                @NonNull String date, @NonNull String time, String tripStatus, @NonNull long calendar,
+                ArrayList<String> notes) {
         this.userID = userID;
         this.calendar = calendar;
-        this.id = id;
+     //   this.id = id;
         this.tripName = tripName;
         this.startPoint = startPoint;
         this.startPointLatitude=startPointLat;
@@ -146,11 +146,9 @@ public class Trip implements Serializable {
     public String getDate() {
         return date;
     }
-
     public void setDate(@NonNull String date) {
         this.date = date;
     }
-
     @NonNull
     public String getTime() {
         return time;
@@ -159,7 +157,6 @@ public class Trip implements Serializable {
     public void setTime(@NonNull String time) {
         this.time = time;
     }
-
 
     @NonNull
     public String getTripStatus() {
@@ -177,6 +174,7 @@ public class Trip implements Serializable {
     public void setCalendar(long calendar) {
         this.calendar = calendar;
     }
+
     public ArrayList<String> getNotes() {
         return notes;
     }

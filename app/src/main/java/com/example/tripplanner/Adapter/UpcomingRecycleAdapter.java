@@ -63,7 +63,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             public void onClick(View v) {
                 initMap(((Trip) tripList.get(position)).getEndPointLatitude(),((Trip) tripList.get(position)).getEndPointLongitude());
 
-               new Thread(() -> Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,((Trip) tripList.get(position)).getId(),"finished")).start();
+               new Thread(() -> Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,((Trip) tripList.get(position)).getId(),Final.FINISHED_TRIP_STATUS)).start();
 
             }
         });
@@ -72,7 +72,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
         holder.btn_canceltrip.setOnClickListener(v -> {
             deleteWarnDialog( ((Trip) tripList.get(position)),(position-1));
-            tripList.remove((Trip)tripList.get(position));
+            tripList.remove(tripList.get(position));
         });
 
         holder.btn_updatetrip.setOnClickListener(v -> {
@@ -118,7 +118,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
     public void deleteWarnDialog(Trip trip , int position){
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog,(ConstraintLayout) activity.findViewById(R.id.dialogLayoutContainer));
+        View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog, activity.findViewById(R.id.dialogLayoutContainer));
         builder.setView(view);
         ((TextView)view.findViewById(R.id.textTitle)).setText(Final.APP_NAME);
         ((TextView)view.findViewById(R.id.textMessage)).setText("Do you want to delete this trip ?");
@@ -130,7 +130,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
         view.findViewById(R.id.btnCancel).setOnClickListener(v -> {
             new Thread(() -> {
-                Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,trip.getId(),"Cancel");
+                Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,trip.getId(),Final.CANCEL_TRIP_STATUS);
             //    unregisterAlarm(trip);
 
             }).start();

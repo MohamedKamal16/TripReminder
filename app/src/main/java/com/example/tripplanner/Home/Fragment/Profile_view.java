@@ -1,6 +1,5 @@
 package com.example.tripplanner.Home.Fragment;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -60,14 +59,10 @@ public class Profile_view extends Fragment {
         btnSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
             }
         });
         return view;
     }
-
     public void setprofile(TextView tv_username, TextView tv_email)
     {
         user= firebaseAuth.getCurrentUser();
@@ -83,7 +78,6 @@ public class Profile_view extends Fragment {
                     String Email=hashMap.get("Email");
                    tv_username.setText(userName);
                    tv_email.setText(Email);
-
                 }
             }
             @Override
@@ -92,8 +86,5 @@ public class Profile_view extends Fragment {
 
             }
         });
-
-
-
     }
 }

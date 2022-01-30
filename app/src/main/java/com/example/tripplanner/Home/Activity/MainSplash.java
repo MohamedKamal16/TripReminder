@@ -8,10 +8,11 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 import com.example.tripplanner.R;
+import com.example.tripplanner.TripData.Final;
 
 public class MainSplash extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN_TIME_OUT = 2000;
+    private static final int SPLASH_SCREEN_TIME_OUT = Final.SPLASH_SCREEN_TIME_OUT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +24,8 @@ public class MainSplash extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(MainSplash.this, Home_Activity.class);
-
                 //Intent is used to switch from one activity to another.
-
                 startActivity(intent);
-                //invoke the SecondActivity.
                 finish();
             }
 

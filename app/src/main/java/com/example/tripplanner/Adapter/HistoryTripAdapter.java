@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.os.Handler;
 import android.os.Message;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -41,14 +40,14 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         Trip trip=(Trip) tripList.get(position);
-        holder.tvNametrip.setText(trip.getTripName());
-        holder.tvdate.setText(trip.getDate());
-        holder.tvstatus.setText(trip.getTripStatus());
-        holder.tvstartpoint.setText(trip.getStartPoint());
-        holder.tvendpoint.setText(trip.getEndPoint());
-        holder.tvtime.setText(trip.getTime());
+        holder.tvNameTrip.setText(trip.getTripName());
+        holder.tvDate.setText(trip.getDate());
+        holder.tvStatus.setText(trip.getTripStatus());
+        holder.tvStartPoint.setText(trip.getStartPoint());
+        holder.tvEndPoint.setText(trip.getEndPoint());
+        holder.tvTime.setText(trip.getTime());
 
-        holder.btndelet.setOnClickListener(new View.OnClickListener() {
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -66,26 +65,26 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
 
 
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
-    TextView tvstartpoint,tvendpoint,tvstatus,tvdate,tvtime,tvNametrip;
-    ImageButton btndelet;
+    TextView tvStartPoint, tvEndPoint, tvStatus, tvDate, tvTime, tvNameTrip;
+    ImageButton btnDelete;
 
 
     public HistoryViewHolder(@NonNull View itemView) {
         super(itemView);
-        tvdate=itemView.findViewById(R.id.tv_date_history);
-        tvtime=itemView.findViewById(R.id.tv_time_histroy);
-        tvstartpoint=itemView.findViewById(R.id.tv_startpoint_histroy);
-        tvendpoint=itemView.findViewById(R.id.tv_endpointTrip_history);
-        tvstatus=itemView.findViewById(R.id.tv_status_histroy);
-        tvNametrip=itemView.findViewById(R.id.tv_nametrip_histroy);
-        btndelet=itemView.findViewById(R.id.btn_delethitory);
+        tvDate =itemView.findViewById(R.id.tv_date_history);
+        tvTime =itemView.findViewById(R.id.tv_time_histroy);
+        tvStartPoint =itemView.findViewById(R.id.tv_startpoint_histroy);
+        tvEndPoint =itemView.findViewById(R.id.tv_endpointTrip_history);
+        tvStatus =itemView.findViewById(R.id.tv_status_histroy);
+        tvNameTrip =itemView.findViewById(R.id.tv_nametrip_histroy);
+        btnDelete =itemView.findViewById(R.id.btn_delethitory);
     }
     }
 
     
     public void deleteWarnDialog(Trip trip , int position){
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog,(ConstraintLayout) activity.findViewById(R.id.dialogLayoutContainer));
+        View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog, activity.findViewById(R.id.dialogLayoutContainer));
         builder.setView(view);
         ((TextView)view.findViewById(R.id.textTitle)).setText(Final.APP_NAME);
         ((TextView)view.findViewById(R.id.textMessage)).setText("Do you want to delete this trip ?");
@@ -102,7 +101,7 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
                 @Override
                 public void run() {
                     Home_Activity.database.tripDAO().deleteById(Home_Activity.fireBaseUserId,trip.getId());
-                    int finishesTripNum=Home_Activity.database.tripDAO().getCountTripType(Home_Activity.fireBaseUserId,"finished");
+                    int finishesTripNum=Home_Activity.database.tripDAO().getCountTripType(Home_Activity.fireBaseUserId,Final.FINISHED_TRIP_STATUS);
                     Message message=new Message();
                     message.arg1  = finishesTripNum;
                 //    handler.sendMessage(message);

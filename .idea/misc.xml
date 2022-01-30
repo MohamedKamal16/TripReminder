@@ -26,15 +26,18 @@
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_main_notification.xml" value="0.18854166666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_main_register.xml" value="0.18854166666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_main_splash.xml" value="0.25" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/activity_map.xml" value="0.1" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/background.xml" value="0.20416666666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/delete_dialog.xml" value="0.33" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_add_note.xml" value="0.2" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_add_trip.xml" value="0.25" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_history.xml" value="0.18854166666666666" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_maps.xml" value="0.19010416666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_upcoming.xml" value="0.15307971014492755" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/fragment_upcomingtrips.xml" value="0.18854166666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/history_trips_card.xml" value="0.25" />
+        <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/layout_alarm.xml" value="0.18840579710144928" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/note_row.xml" value="0.20416666666666666" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/resetpassword.xml" value="0.1956521739130435" />
         <entry key="..\:/Files/Android/project/TripReminder/app/src/main/res/layout/trip_upcoming_card.xml" value="0.5" />

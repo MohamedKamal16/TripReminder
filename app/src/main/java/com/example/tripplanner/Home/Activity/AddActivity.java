@@ -11,6 +11,7 @@ import android.util.Log;
 import com.example.tripplanner.Home.Fragment.AddNoteFragment;
 import com.example.tripplanner.Home.Fragment.FragmentAddTrip;
 import com.example.tripplanner.R;
+import com.example.tripplanner.TripData.Final;
 
 public class AddActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
@@ -34,17 +35,17 @@ public class AddActivity extends AppCompatActivity {
             //Add note
             fragmentManager = getSupportFragmentManager();
             fragment = new AddNoteFragment();
-            fragmentManager.beginTransaction().add(R.id.switchFragment, fragment, "fragment").commit();
+            fragmentManager.beginTransaction().add(R.id.switchFragment, fragment, Final.FRAGMENT_TAG).commit();
         } else {
             if (savedInstanceState == null) {
                 // AddTrip
                 fragmentManager = getSupportFragmentManager();
                 fragment = new FragmentAddTrip();
-                fragmentManager.beginTransaction().add(R.id.switchFragment, fragment, "fragment").commit();
+                fragmentManager.beginTransaction().add(R.id.switchFragment, fragment, Final.FRAGMENT_TAG).commit();
             }
             if (savedInstanceState != null) {
                 //not clear
-                fragment = fragmentManager.findFragmentByTag("fragment");
+                fragment = fragmentManager.findFragmentByTag(Final.FRAGMENT_TAG);
                 fragment = getSupportFragmentManager().getFragment(savedInstanceState, "myFragmentName");
             }
         }

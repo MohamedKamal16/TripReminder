@@ -24,8 +24,7 @@ public class MainLogin extends AppCompatActivity {
     FirebaseAuth auth;
     AlertDialog.Builder resetalert;
     LayoutInflater inflater;
-    String resetPasswoed;
-    EditText email;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

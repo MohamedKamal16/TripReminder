@@ -26,9 +26,7 @@ import java.util.Objects;
 
 public class AddNoteFragment extends Fragment {
 
-
-    public AddNoteFragment() {
-    }
+    public AddNoteFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +61,7 @@ public class AddNoteFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         if(AddActivity.key==3) {
             btnSaveNotes.setText("Edit");
-            new AddNoteFragment.LoadRoomData().execute();
+            new roomData().execute();
 
         }else {
             selectedNotes=new ArrayList<>();
@@ -72,17 +70,16 @@ public class AddNoteFragment extends Fragment {
             recyclerView.setAdapter(adapter);
 
         }
-        //button add note
+        //Click Method Haandle
         btnAddNote.setOnClickListener(v -> {
-            if(selectedNotes.size()<=10){
+            if(selectedNotes.size()<=20){
                 selectedNotes.add("");
                 adapter.notifyDataSetChanged();
             }else{
-                Toast.makeText(getContext(),"you can only add 10 notes",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"you can only add 20 notes",Toast.LENGTH_SHORT).show();
             }
 
         });
-
         btnDeleteNote.setOnClickListener(v -> {
             if(selectedNotes.size()>0){
                 adapter.removeItem();
@@ -104,9 +101,12 @@ public class AddNoteFragment extends Fragment {
                     result.putStringArrayList("bundleKey", notes);
                 }
             }else if(AddActivity.key==3){
-                new Thread(() ->
-                        Home_Activity.database.tripDAO()
-                                .EditNotes(AddActivity.ID,selectedNotes.toString())).start();
+                new Thread(() -> {
+                    Home_Activity.database.tripDAO()
+                            .EditNotes(AddActivity.ID, selectedNotes.toString());
+                           getActivity().finish();
+                }).start();
+
             }
             FragmentManager fragmentManager = getActivity() .getSupportFragmentManager();
             fragmentManager.popBackStack ("name", FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -131,9 +131,7 @@ public class AddNoteFragment extends Fragment {
         }
     }
 
-
-
-    private class LoadRoomData extends AsyncTask<Void, Void, Trip> {
+    private class roomData extends AsyncTask<Void, Void, Trip> {
         @Override
         protected Trip doInBackground(Void... voids) {
             return Home_Activity.database.tripDAO().selectById(AddActivity.ID);
@@ -141,10 +139,10 @@ public class AddNoteFragment extends Fragment {
         @Override
         protected void onPostExecute(Trip trip) {
             super.onPostExecute(trip);
-            selectedTrip = trip;
-            if (selectedTrip.getNotes()!=null) {
-                selectedNotes = selectedTrip.getNotes();
-                adapter = new NoteAdapter(selectedTrip.getNotes(), getContext());
+            AddNoteFragment.this.trip = trip;
+            if (AddNoteFragment.this.trip.getNotes()!=null) {
+                selectedNotes = AddNoteFragment.this.trip.getNotes();
+                adapter = new NoteAdapter(AddNoteFragment.this.trip.getNotes(), getContext());
             }else {
                 selectedNotes=new ArrayList<>();
                 selectedNotes.add("");
@@ -157,16 +155,12 @@ public class AddNoteFragment extends Fragment {
     RecyclerView recyclerView;
     NoteAdapter adapter;
     LinearLayoutManager linearLayoutManager;
-    ImageButton btnAddNote;
-    ImageButton   btnDeleteNote;
+    ImageButton btnAddNote,btnDeleteNote;
     Button btnSaveNotes;
     ArrayList<String> notes;
-    String date;
-    String time;
-    String date2;
-    String time2;
+    String date,time,date2,time2;
     Bundle result;
-    Trip selectedTrip;
+    Trip trip;
     ArrayList<String> selectedNotes;
 
 }

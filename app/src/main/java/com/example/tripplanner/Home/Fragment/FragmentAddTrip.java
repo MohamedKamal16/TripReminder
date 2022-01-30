@@ -28,6 +28,8 @@ import android.widget.Toast;
 import com.example.tripplanner.Home.Activity.AddActivity;
 import com.example.tripplanner.Home.Activity.Home_Activity;
 import com.example.tripplanner.TripData.Final;
+import com.example.tripplanner.databinding.ActivityMainLoginBinding;
+import com.example.tripplanner.databinding.FragmentAddTripBinding;
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -48,38 +50,39 @@ import java.util.TimeZone;
 
 
 public class FragmentAddTrip extends Fragment {
+    FragmentAddTripBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Places.initialize(getContext(), API_KEY);
+      ;
+        Places.initialize(getContext(), Final.API_KEY);
         sharedPreferences =getActivity().getSharedPreferences(PREF_NAME,0);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Places.initialize(requireContext(), Final.API_KEY);
         // Inflate the layout for this fragment
         view =inflater.inflate(R.layout.fragment_add_trip, container, false);
+
         //Method have declared variable
-        initComponent();
+         initComponent();
 
         calenderNormal = Calendar.getInstance();
         calendarRound = Calendar.getInstance();
-        //on click listener methods
-        etStartPoint.setOnClickListener(v -> placesAutocompletes(StartPointFlag));
-        etEndPoint.setOnClickListener(v -> placesAutocompletes(ENDPOINTFlag));
-
-
+        //Handle Edit Trip Button
         if(AddActivity.key==2) {
-            btnSaveTrip.setText("Edit");
+            btnAddTrip.setText("Edit");
             radioGroup.setVisibility(View.GONE);
             constraintLayoutRoundTrip.setVisibility(View.GONE);
             btnAddNotes.setVisibility(View.GONE);
             new getRoomData().execute();
         }
-
+        //on click listener methods
+        //Place Api
+        etStartPoint.setOnClickListener(v -> placesAutocompletes(StartPointFlag));
+        etEndPoint.setOnClickListener(v -> placesAutocompletes(ENDPOINTFlag));
 
         //start handle calender(views for calender)
         //manger of calender
@@ -95,29 +98,20 @@ public class FragmentAddTrip extends Fragment {
             tvTime.setText(time);
             tvRoundDate.setText(date2);
             tvRoundTime.setText(time2);
-
         });
-
-        radioButtonOneDirection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvRoundTime.setText("");
-                tvRoundDate.setText("");
-                constraintLayoutRoundTrip.setVisibility(View.GONE);
-                isRound =false;
+       //Handle Round Button
+        radioButtonOneDirection.setOnClickListener(v -> {
+            tvRoundTime.setText("");
+            tvRoundDate.setText("");
+            constraintLayoutRoundTrip.setVisibility(View.GONE);
+            isRound =false;
+        });
+        radioButtonRoundTrip.setOnClickListener(v -> {
+            isRound =true;
+            if (isRound =true) {
+                constraintLayoutRoundTrip.setVisibility(View.VISIBLE);
             }
         });
-
-        radioButtonRoundTrip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (isRound =true) {
-                    constraintLayoutRoundTrip.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
         //button of time
         imageButtonTime.setOnClickListener(view -> {
             if (isDateCorrect)
@@ -127,13 +121,11 @@ public class FragmentAddTrip extends Fragment {
 
             isFirstTimeSelected = true;
         });
-
         //button of date
         imageButtonDate.setOnClickListener(view -> {
             calenderDate(tvDate, 1,calenderNormal);
             tvTime.setText("");
         });
-
         //date2
         imageButtonRoundDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +137,6 @@ public class FragmentAddTrip extends Fragment {
                     Toast.makeText(getContext(), "Please choose date of the first trip", Toast.LENGTH_SHORT).show();
             }
         });
-
         //time 2
         imageButtonRoundTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,7 +148,6 @@ public class FragmentAddTrip extends Fragment {
                     Toast.makeText(getContext(), "Please choose date of the round trip", Toast.LENGTH_SHORT).show();
             }
         });
-
         //buttonAddNote
         btnAddNotes.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
@@ -166,7 +156,6 @@ public class FragmentAddTrip extends Fragment {
                 if(isFirstAddNotes){
                     FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                     transaction.setReorderingAllowed(true);
-
                     // Replace  fragment with add note fragment
                     transaction.replace(R.id.switchFragment, AddNoteFragment.class,null);
                     transaction.addToBackStack("name");
@@ -187,14 +176,10 @@ public class FragmentAddTrip extends Fragment {
             }
         });
 
-        btnSaveTrip.setOnClickListener(new View.OnClickListener() {
+        btnAddTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //know valid time
-                Log.i(Final.LOG_TAG,DateFormat.getDateTimeInstance().format(calenderNormal.getTime())+"  first trip");
-                Log.i(Final.LOG_TAG,DateFormat.getDateTimeInstance().format(calendarRound.getTime())+"  second trip");
                 checkData();
-
             }
         });
         return view;
@@ -204,13 +189,22 @@ public class FragmentAddTrip extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-
         outState.putString("Date", tvDate.getText().toString());
         outState.putString("Time", tvTime.getText().toString());
         outState.putString("DateRound", tvRoundDate.getText().toString());
         outState.putString("TimeRound", tvRoundTime.getText().toString());
     }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            tvDate.setText(savedInstanceState.getString("Date"));
+            tvTime.setText(savedInstanceState.getString("Time"));
+            tvRoundDate.setText(savedInstanceState.getString("DateRound"));
+            tvRoundTime.setText(savedInstanceState.getString("TimeRound"));
+        }
 
+    }
     //place Code
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -226,10 +220,9 @@ public class FragmentAddTrip extends Fragment {
             }
             else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(data);
-
+                Log.i("STATUS", status.getStatusMessage());
             }
             return;
-
         }
         else if (requestCode == ENDPOINTFlag) {
             if (resultCode == RESULT_OK) {
@@ -243,7 +236,6 @@ public class FragmentAddTrip extends Fragment {
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
-
     }
 
     //Method to handle place
@@ -255,18 +247,6 @@ public class FragmentAddTrip extends Fragment {
         startActivityForResult(intent, flag);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            tvDate.setText(savedInstanceState.getString("Date"));
-            tvTime.setText(savedInstanceState.getString("Time"));
-            tvRoundDate.setText(savedInstanceState.getString("DateRound"));
-            tvRoundTime.setText(savedInstanceState.getString("TimeRound"));
-        }
-
-    }
-
     //Date
     public void calenderDate(TextView textViewDate1, int check, Calendar incomingCal) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (datePicker, year, month, day) -> {
@@ -275,9 +255,7 @@ public class FragmentAddTrip extends Fragment {
             int nowDay;
             month = month + 1;
             String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-
-            Log.i(Final.LOG_TAG,date);
-
+            Log.i("Check Date",date);
             if(check == 1) {
                 String[] dateTotal = date.split("-");
                 nowYear = Integer.parseInt(dateTotal[2]);
@@ -371,7 +349,6 @@ public class FragmentAddTrip extends Fragment {
         }, year, month, day);
         datePickerDialog.show();
     }
-
     //Time
     public void calenderTime(TextView textViewTime1, int check, Calendar incomingCal) {
         TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), (timePicker, selectedHours, selectedMinute) -> {
@@ -440,24 +417,19 @@ public class FragmentAddTrip extends Fragment {
                 incomingCal.set(Calendar.SECOND,0);
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("HH:mm");
                 textViewTime1.setText(format.format(incomingCal.getTime()));
-                writeSp();
+                sharedPrefernceSaveData();
             }
         }, 12, 0, false);
         timePickerDialog.show();
     }
-
-
     public void sharedPrefernceSaveData(){
         SharedPreferences.Editor editor= sharedPreferences.edit();
-
         editor.putLong("CalendarNormal",calenderNormal.getTimeInMillis());
         editor.putLong("CalendarRound",calendarRound.getTimeInMillis());
         editor.apply();
     }
-
     //saveDataButton
     public void checkData(){
-
         if(!TextUtils.isEmpty(etTripName.getText())){
             etTripName.setError(null);
             if(!TextUtils.isEmpty(etStartPoint.getText())){
@@ -468,18 +440,18 @@ public class FragmentAddTrip extends Fragment {
                         tvDate.setError(null);
                         if(!TextUtils.isEmpty(tvTime.getText())){
                             tvTime.setError(null);
-
-                            //when edit trip
+                            //Edit trip
                             if(AddActivity.key==2){
                                 new Thread(() -> {
                                     if (placeEndPoint==null) {
                                           Home_Activity.database.tripDAO().EditTrip(AddActivity.ID,
                                                   etTripName.getText().toString(), etStartPoint.getText().toString(),
                                                   etEndPoint.getText().toString(), selectedTrip.getEndPointLatitude(),
-                                                  selectedTrip.getEndPointLongitude(), tvDate.getText().toString(), tvTime.getText().toString(),calenderNormal.getTimeInMillis());
-                                   }else {
-                                          Home_Activity.database.tripDAO().EditTrip(AddActivity.ID, etTripName.getText().toString(), etStartPoint.getText().toString(),
-                                                   etEndPoint.getText().toString(), placeEndPoint.getLatLng().latitude
+                                                  selectedTrip.getEndPointLongitude(), tvDate.getText().toString(),
+                                                  tvTime.getText().toString(),calenderNormal.getTimeInMillis());
+                                    }else {
+                                          Home_Activity.database.tripDAO().EditTrip(AddActivity.ID, etTripName.getText().toString(),
+                                                  etStartPoint.getText().toString(),etEndPoint.getText().toString(), placeEndPoint.getLatLng().latitude
                                                     ,placeEndPoint.getLatLng().longitude, tvDate.getText().toString(),
                                                    tvTime.getText().toString(),calenderNormal.getTimeInMillis());
                                            }
@@ -487,29 +459,26 @@ public class FragmentAddTrip extends Fragment {
                                 }).start();
                                 return;
                             }
-                            // add trip object
-                            if (resultNotes != null) {
 
+                            if (resultNotes != null) {
+                                //Create first Trip
                                 trip = new Trip(Home_Activity.fireBaseUserId, etTripName.getText().toString(), placeStartPoint.getName(), placeStartPoint.getLatLng().latitude,
                                         placeStartPoint.getLatLng().longitude, placeEndPoint.getName(), placeEndPoint.getLatLng().latitude, placeEndPoint.getLatLng().longitude,
                                         tvDate.getText().toString(), tvTime.getText().toString(),
-                                        "upcoming", sharedPreferences.getLong("CalendarNormal", 0), resultNotes);
+                                        Final.UPCOMING_TRIP_STATUS, sharedPreferences.getLong("CalendarNormal", 0), resultNotes);
                                 if (isRound) {
                                     if (!TextUtils.isEmpty(tvRoundDate.getText())) {
                                         tvRoundDate.setError(null);
                                         if (!TextUtils.isEmpty(tvRoundTime.getText())) {
                                             tvRoundTime.setError(null);
-                                            //create two obj
+                                            //Create Secound Trip
                                             Trip tripRound = new Trip(Home_Activity.fireBaseUserId, etTripName.getText().toString() + " Round", placeEndPoint.getName(), placeEndPoint.getLatLng().latitude, placeEndPoint.getLatLng().longitude,
                                                     placeStartPoint.getName(), placeStartPoint.getLatLng().latitude, placeStartPoint.getLatLng().longitude,
                                                     tvRoundDate.getText().toString(), tvRoundTime.getText().toString(),
-
-                                                    "upcoming", sharedPreferences.getLong("CalendarRound", 0), resultNotes);
-
-
+                                                    Final.UPCOMING_TRIP_STATUS, sharedPreferences.getLong("CalendarRound", 0), resultNotes);
+                                            //insert them to database as seperate trips
                                             insertRoom(trip);
                                             insertRoom(tripRound);
-
                                             getActivity().finish();
                                         } else {
                                             tvRoundTime.setError("Valid Time");
@@ -521,7 +490,6 @@ public class FragmentAddTrip extends Fragment {
                                     }
                                 }
                                 else {
-
                                     insertRoom(trip);
                                     getActivity().finish();
                                 }
@@ -530,7 +498,7 @@ public class FragmentAddTrip extends Fragment {
                                 trip = new Trip(Home_Activity.fireBaseUserId, etTripName.getText().toString(), placeStartPoint.getName(), placeStartPoint.getLatLng().latitude,
                                         placeStartPoint.getLatLng().longitude, placeEndPoint.getName(), placeEndPoint.getLatLng().latitude, placeEndPoint.getLatLng().longitude,
                                         tvDate.getText().toString(), tvTime.getText().toString(),
-                                        "upcoming", calenderNormal.getTimeInMillis(), null);
+                                        Final.UPCOMING_TRIP_STATUS, calenderNormal.getTimeInMillis(), null);
                                 if (isRound) {
                                     if (!TextUtils.isEmpty(tvRoundDate.getText())) {
                                         tvRoundDate.setError(null);
@@ -539,11 +507,10 @@ public class FragmentAddTrip extends Fragment {
                                             //create two obj
                                             Trip tripRound = new Trip(Home_Activity.fireBaseUserId, etTripName.getText().toString() + " Round", placeEndPoint.getName(), placeEndPoint.getLatLng().latitude, placeEndPoint.getLatLng().longitude,
                                                     placeStartPoint.getName(), placeStartPoint.getLatLng().latitude, placeStartPoint.getLatLng().longitude,
-                                                    tvRoundDate.getText().toString(), tvRoundTime.getText().toString(),"upcoming", calendarRound.getTimeInMillis(), null);
+                                                    tvRoundDate.getText().toString(), tvRoundTime.getText().toString(),Final.UPCOMING_TRIP_STATUS, calendarRound.getTimeInMillis(), null);
 
                                             insertRoom(trip);
                                             insertRoom(tripRound);
-
                                             getActivity().finish();
 
                                         } else {
@@ -606,7 +573,7 @@ public class FragmentAddTrip extends Fragment {
         radioGroup=view.findViewById(R.id.radioGroup_typeTrip);
         radioButtonOneDirection = view.findViewById(R.id.radioBtn_oneDirection);
         radioButtonRoundTrip = view.findViewById(R.id.radioBtn_roundTrip);
-        btnSaveTrip = view.findViewById(R.id.btn_saveTrip);
+        btnAddTrip = view.findViewById(R.id.btn_saveTrip);
         btnAddNotes = view.findViewById(R.id.btn_addNotes);
         constraintLayoutRoundTrip=view.findViewById(R.id.constraintLayoutAddRound);
 
@@ -615,39 +582,27 @@ public class FragmentAddTrip extends Fragment {
 
 
     //declare Variables
-    EditText etTripName;
-    EditText etStartPoint;
-    EditText etEndPoint;
-    TextView tvTripName;
-    TextView tvDate;
-    TextView tvRoundDate;
-    ImageButton btnAddNotes;
-    Button btnSaveTrip;
-    ImageButton imageButtonDate;
-    ImageButton imageButtonRoundDate;
-    TextView tvTime;
-    TextView tvRoundTime;
-    ImageButton imageButtonTime;
-    ImageButton imageButtonRoundTime;
-    RadioButton radioButtonOneDirection;
-    RadioButton radioButtonRoundTrip;
+    EditText etTripName,etStartPoint,etEndPoint;
+    TextView tvTripName,tvDate,tvRoundDate,tvTime, tvRoundTime;
+    Button btnAddTrip;
+    ImageButton btnAddNotes,imageButtonDate,imageButtonRoundDate
+            ,imageButtonTime,imageButtonRoundTime;
+    RadioButton radioButtonOneDirection,radioButtonRoundTrip;
     RadioGroup radioGroup;
     ConstraintLayout constraintLayoutRoundTrip;
     View view;
     //for place Api (link-startActivity flag for start and end)
-    private static final String API_KEY  = "AIzaSyBpK-AM55wLemXfm-ffY9IpHA3MkF5vd0M";
     private static final int StartPointFlag = 1;
     private static final int ENDPOINTFlag = 2;
-    Place placeStartPoint;
-    Place placeEndPoint;
-
+    Place placeStartPoint,placeEndPoint;
+    //Calender
     Calendar calender = Calendar.getInstance();
     final int year = calender.get(Calendar.YEAR);
     final int month = calender.get(Calendar.MONTH);
     final int day = calender.get(Calendar.DAY_OF_MONTH);
-    SharedPreferences sharedPreferences;
     Calendar calenderNormal;
     Calendar calendarRound;
+    SharedPreferences sharedPreferences;
     public static final String PREF_NAME="MY_PREF";
     boolean isDateCorrect = false;
     boolean isTimeCorrect = false;

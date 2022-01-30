@@ -14,6 +14,7 @@ import com.example.tripplanner.Adapter.UpcomingRecycleAdapter;
 import com.example.tripplanner.Home.Activity.AddActivity;
 import com.example.tripplanner.Home.Activity.Home_Activity;
 import com.example.tripplanner.R;
+import com.example.tripplanner.TripData.Final;
 import com.example.tripplanner.TripData.Trip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class Upcomin_view extends Fragment {
 
         @Override
         protected List<Trip> doInBackground(Void...voids) {
-            return Home_Activity.database.tripDAO().selectUpcomingTrip(Home_Activity.fireBaseUserId,"upcoming");
+            return Home_Activity.database.tripDAO().selectUpcomingTrip(Home_Activity.fireBaseUserId, Final.UPCOMING_TRIP_STATUS);
         }
 
         @Override
