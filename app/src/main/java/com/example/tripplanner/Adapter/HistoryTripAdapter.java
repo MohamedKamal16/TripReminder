@@ -77,9 +77,55 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
         tvstatus=itemView.findViewById(R.id.tv_status_histroy);
         tvNametrip=itemView.findViewById(R.id.tv_nametrip_histroy);
         btndelet=itemView.findViewById(R.id.btn_delethitory);
-        btnmap=itemView.findViewById(R.id.btn_maphistroy);
-
-
     }
 }
+
+   /* public void customTwoButtonsDialog(Trip trip , int position){
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context,R.style.AlertDialogTheme);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_permission_dialog,(ConstraintLayout) activity.findViewById(R.id.dialogLayoutContainer));
+        builder.setView(view);
+        ((TextView)view.findViewById(R.id.textTitle)).setText(Constants.APP_NAME);
+        ((TextView)view.findViewById(R.id.textMessage)).setText("Do you want to delete this trip ?");
+        ((Button)view.findViewById(R.id.btnCancel)).setText(Constants.PER_DIALOG_CANCEL);
+        ((Button)view.findViewById(R.id.btnOk)).setText(Constants.PER_DIALOG_CONFIRM);
+        ((ImageView)view.findViewById(R.id.imgTitle)).setImageResource(R.drawable.ic_baseline_hourglass_bottom_24);
+
+        final androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+
+
+        view.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+
+        view.findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        HomeActivity.database.tripDAO().deleteById(HomeActivity.fireBaseUseerId,trip.getId());
+                        //   tripList.remove(trip);
+                        int finishesTripNum=HomeActivity.database.tripDAO().getCountTripType(HomeActivity.fireBaseUseerId,"finished");
+                        Message msg=new Message();
+                        msg.arg1  = finishesTripNum;
+                        handler.sendMessage(msg);
+
+                    }
+                }).start();
+                //  notifyItemRemoved(position);
+                notifyDataSetChanged();
+                alertDialog.dismiss();
+            }
+        });
+
+
+        if(alertDialog.getWindow() !=null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+    }*/
 }

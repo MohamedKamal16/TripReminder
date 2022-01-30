@@ -21,9 +21,10 @@ import android.widget.Toast;
 
 import com.example.tripplanner.Adapter.NoteAdapter;
 import com.example.tripplanner.Home.Activity.AddActivity;
+import com.example.tripplanner.Home.Activity.Home_Activity;
 import com.example.tripplanner.R;
 import com.example.tripplanner.TripData.Trip;
-import com.example.tripplanner.TripData.TripViewModel;
+
 
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -37,7 +38,7 @@ public class AddNoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tripViewModel=new ViewModelProvider( this).get(TripViewModel.class);
+
 
 
         getParentFragmentManager().setFragmentResultListener("datakey", this, new FragmentResultListener() {
@@ -126,7 +127,8 @@ public class AddNoteFragment extends Fragment {
 
                 }else if(AddActivity.key==3){
 
-                    tripViewModel.EditNotes(AddActivity.ID,selectedNotes.toString());
+                    Home_Activity.database.tripDAO().EditNotes(AddActivity.ID,selectedNotes.toString());
+
                 }
                 FragmentManager fm = getActivity()
                         .getSupportFragmentManager();
@@ -147,7 +149,7 @@ public class AddNoteFragment extends Fragment {
         @Override
         protected Trip doInBackground(Void... voids) {
 
-            return tripViewModel.selectById(AddActivity.ID);
+            return Home_Activity.database.tripDAO().selectById(AddActivity.ID);
         }
         @Override
         protected void onPostExecute(Trip trip) {
@@ -178,7 +180,7 @@ public class AddNoteFragment extends Fragment {
     String date2;
     String time2;
     Bundle result;
-    TripViewModel tripViewModel;
+
     Trip selectedTrip;
     ArrayList<String> selectedNotes;
     public static final String TAG="Notes";
