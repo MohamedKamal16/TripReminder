@@ -6,15 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tripplanner.Adapter.HistoryTripAdapter;
-
 import com.example.tripplanner.Home.Activity.Home_Activity;
-
 import com.example.tripplanner.Home.Activity.MapActivity;
 import com.example.tripplanner.R;
 import com.example.tripplanner.TripData.Final;
@@ -34,9 +32,6 @@ public class History_view extends Fragment {
     int finishedTripsNum;
     List tripList=new ArrayList<Trip>();
 
-
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView=view.findViewById(R.id.recyclehistory);
@@ -56,6 +51,7 @@ public class History_view extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        return inflater.inflate(R.layout.fragment_history, container, false);
+
     }
 
     @Override
@@ -70,12 +66,14 @@ public class History_view extends Fragment {
             finishedTripsNum=Home_Activity.database.tripDAO().getCountTripType(Home_Activity.fireBaseUserId, Final.FINISHED_TRIP_STATUS);
             return Home_Activity.database.tripDAO().selectHistoryTrip(Home_Activity.fireBaseUserId,
                     Final.CANCEL_TRIP_STATUS,Final.FINISHED_TRIP_STATUS,Final.MISSED_TRIP_STATUS);
+
         }
 
         @Override
         protected void onPostExecute(List<Trip> trips) {
             super.onPostExecute(trips);
             tripList = trips;
+
             adapter=new HistoryTripAdapter(tripList,getContext(),getActivity());
             recyclerView.setAdapter(adapter);
 

@@ -33,6 +33,7 @@ public class Upcomin_view extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         tripRecycleView = view.findViewById(R.id.trip_recycleView);
         upcomingRecycleAdapter = new UpcomingRecycleAdapter(tripsList, getContext(), getActivity());
         floatingBtnAdd = view.findViewById(R.id.add_flout_btn);

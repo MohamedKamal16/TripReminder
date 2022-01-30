@@ -53,6 +53,17 @@
     <string name="tv_endpointTrip_history">tv_endpointTrip_history</string>
     <string name="tv_time_histroy">tv_time_histroy</string>
     <string name="tv_status_histroy">tv_status_histroy</string>
+    <string name="textNotes">Notes</string>
+    <string name="checkBox1">checkBox</string>
+    <string name="checkBox2">CheckBox</string>
+    <string name="checkBox5">ChecBox</string>
+    <string name="checkBox4">CheckBox</string>
+    <string name="checkBox10">CheckBox</string>
+    <string name="checkBox9">CheckBox</string>
+    <string name="checkBox8">CheckBox</string>
+    <string name="checkBox3">CheckBox</string>
+    <string name="checkBox6">CheckBox</string>
+    <string name="checkBox7">CheckBox</string>
 
 
 </resources>

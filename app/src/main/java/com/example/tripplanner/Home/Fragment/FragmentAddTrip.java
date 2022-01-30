@@ -148,7 +148,8 @@ public class FragmentAddTrip extends Fragment {
                     Toast.makeText(getContext(), "Please choose date of the round trip", Toast.LENGTH_SHORT).show();
             }
         });
-        //buttonAddNote
+
+        //buttonaddNote
         btnAddNotes.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
             @Override
@@ -172,6 +173,7 @@ public class FragmentAddTrip extends Fragment {
                     if (!TextUtils.isEmpty(tvRoundTime.getText()))
                         result.putString("time2", tvRoundTime.getText().toString());
                     getParentFragmentManager().setFragmentResult("datakey", result);
+
                 }
             }
         });
@@ -182,6 +184,7 @@ public class FragmentAddTrip extends Fragment {
                 checkData();
             }
         });
+
         return view;
     }
 
@@ -249,6 +252,7 @@ public class FragmentAddTrip extends Fragment {
 
     //Date
     public void calenderDate(TextView textViewDate1, int check, Calendar incomingCal) {
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (datePicker, year, month, day) -> {
             int nowYear;
             int nowMonth;
@@ -295,6 +299,7 @@ public class FragmentAddTrip extends Fragment {
                 textViewDate1.setText(format.format(incomingCal.getTime()));
             }else if(year == nowYear){
                 if (month > nowMonth) {
+
                     if (check == 1) {
                         isDateCorrect = true;
                     } else {
@@ -306,6 +311,7 @@ public class FragmentAddTrip extends Fragment {
                     incomingCal.set(Calendar.YEAR, year);
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
                     textViewDate1.setText(format.format(incomingCal.getTime()));
+
                 } else if(month == nowMonth){
 
                     if (day >= nowDay) {
@@ -410,6 +416,7 @@ public class FragmentAddTrip extends Fragment {
                         else
                             isTimeCorrectRoundTrip = false;
                     }
+
                 }
             }else{
                 incomingCal.set(Calendar.HOUR_OF_DAY,selectedHours);
@@ -422,7 +429,9 @@ public class FragmentAddTrip extends Fragment {
         }, 12, 0, false);
         timePickerDialog.show();
     }
+
     public void sharedPrefernceSaveData(){
+
         SharedPreferences.Editor editor= sharedPreferences.edit();
         editor.putLong("CalendarNormal",calenderNormal.getTimeInMillis());
         editor.putLong("CalendarRound",calendarRound.getTimeInMillis());
@@ -442,6 +451,7 @@ public class FragmentAddTrip extends Fragment {
                             tvTime.setError(null);
                             //Edit trip
                             if(AddActivity.key==2){
+
                                 new Thread(() -> {
                                     if (placeEndPoint==null) {
                                           Home_Activity.database.tripDAO().EditTrip(AddActivity.ID,
@@ -456,6 +466,7 @@ public class FragmentAddTrip extends Fragment {
                                                    tvTime.getText().toString(),calenderNormal.getTimeInMillis());
                                            }
                                     getActivity().finish();
+                                  
                                 }).start();
                                 return;
                             }
@@ -475,6 +486,7 @@ public class FragmentAddTrip extends Fragment {
                                             Trip tripRound = new Trip(Home_Activity.fireBaseUserId, etTripName.getText().toString() + " Round", placeEndPoint.getName(), placeEndPoint.getLatLng().latitude, placeEndPoint.getLatLng().longitude,
                                                     placeStartPoint.getName(), placeStartPoint.getLatLng().latitude, placeStartPoint.getLatLng().longitude,
                                                     tvRoundDate.getText().toString(), tvRoundTime.getText().toString(),
+
                                                     Final.UPCOMING_TRIP_STATUS, sharedPreferences.getLong("CalendarRound", 0), resultNotes);
                                             //insert them to database as seperate trips
                                             insertRoom(trip);
@@ -603,6 +615,7 @@ public class FragmentAddTrip extends Fragment {
     Calendar calenderNormal;
     Calendar calendarRound;
     SharedPreferences sharedPreferences;
+
     public static final String PREF_NAME="MY_PREF";
     boolean isDateCorrect = false;
     boolean isTimeCorrect = false;
