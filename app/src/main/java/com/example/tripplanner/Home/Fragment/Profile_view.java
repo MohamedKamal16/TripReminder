@@ -16,12 +16,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
-
 import com.bumptech.glide.Glide;
 import com.example.tripplanner.Home.Activity.MainLogin;
 import com.example.tripplanner.R;
@@ -40,7 +38,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +50,6 @@ public class Profile_view extends Fragment {
     TripDatabase database;
     String userId;
     List<Trip>tripList;
-
     TextView tv_username,tv_email;
     Button btnlogout,btnSync;
     ImageView imgprofile;
@@ -85,17 +81,19 @@ public class Profile_view extends Fragment {
         btnSync=view.findViewById(R.id.btnSync);
         imgprofile=view.findViewById(R.id.imageprofile);
         btnlogout=view.findViewById(R.id.buttonOut);
-            setprofile(tv_username,tv_email);
+        btnSync=view.findViewById(R.id.btnSync);
+        setprofile(tv_username,tv_email);
+
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 issync=true;
                 new readFromdatabase().execute();
                 writeOnFireBase(tripList);
+
                 firebaseAuth.signOut();
                    startActivity(new Intent(getContext(),MainLogin.class));
                     getActivity().finish();
-
           }
 
         });
@@ -108,9 +106,14 @@ public class Profile_view extends Fragment {
             }
         });
 
-        return view;
 
+
+
+            }
+        });
+        return view;
     }
+
     public void setprofile(TextView tv_username, TextView tv_email)
     {
 
@@ -128,11 +131,8 @@ public class Profile_view extends Fragment {
 
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
-           //get error
 
             }
         });

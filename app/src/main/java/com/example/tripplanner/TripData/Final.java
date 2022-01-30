@@ -23,8 +23,6 @@ public interface Final {
     String DIALOG_START = "Start";
     String MISSED_TRIP_STATUS = "Missed";
 
-/*Cancel
-* upcoming
-* */
+
 }
 

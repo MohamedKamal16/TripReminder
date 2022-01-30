@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.Settings;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +17,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.tripplanner.Home.Activity.AddActivity;
 import com.example.tripplanner.Home.Activity.FloatingBubbleService;
 import com.example.tripplanner.Home.Activity.Home_Activity;
 import com.example.tripplanner.R;
 import com.example.tripplanner.TripData.Final;
 import com.example.tripplanner.TripData.Trip;
-
 import java.util.List;
 
 
@@ -37,8 +34,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
     List tripList;
     Context context;
     Activity activity;
-
-
 
     public UpcomingRecycleAdapter(List tripList, Context context, Activity activity) {
         this.tripList = tripList;
@@ -52,7 +47,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
          View view= LayoutInflater.from(parent.getContext())
                  .inflate(R.layout.trip_upcoming_card,parent,false);
-
 
         return new  MyViewHolder(view);
     }
@@ -71,7 +65,8 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             @Override
             public void onClick(View v) {
                 initMap(((Trip) tripList.get(position)).getEndPointLatitude(),((Trip) tripList.get(position)).getEndPointLongitude());
-               initBubble(((Trip) tripList.get(position)).getId(),((Trip) tripList.get(position)).getUserID());
+               
+                initBubble(((Trip) tripList.get(position)).getId(),((Trip) tripList.get(position)).getUserID());
                // unregisterAlarm((Trip) tripList.get(position));
        //TODO Handle repo database
                 new Thread(new Runnable() {
@@ -106,6 +101,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
                 holder.itemView.setVisibility(View.INVISIBLE);
             }
 
+
         });
 
     }
@@ -123,6 +119,9 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         mapIntent.setPackage("com.google.android.apps.maps");
         context.startActivity(mapIntent);
     }
+  
+  
+
 
     public void updateTrip(Trip trip){
         Intent intent = new Intent(context,AddActivity.class);
@@ -179,6 +178,8 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
     }
 
 
+
+
     public void deleteWarnDialog(Trip trip , int position){
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
         View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog,(ConstraintLayout) activity.findViewById(R.id.dialogLayoutContainer));
@@ -187,8 +188,8 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         ((TextView)view.findViewById(R.id.textMessage)).setText("Do you want to delete this trip ?");
         ((Button)view.findViewById(R.id.btnOk)).setText("Cancel");
         ((Button)view.findViewById(R.id.btnCancel)).setText("Ok");
-
         final androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+
 
         view.findViewById(R.id.btnOk).setOnClickListener(v -> alertDialog.dismiss());
 
@@ -200,7 +201,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             }).start();
             //TODO CLOSE ALARM
 
-            //  notifyItemRemoved(position);
             notifyDataSetChanged();
             alertDialog.dismiss();
         });
@@ -221,10 +221,9 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
-                tvName=itemView.findViewById(R.id.tv_nametrip);
-                tvStarttrip=itemView.findViewById(R.id.tv_starttrip);
-                tvEndtrip=itemView.findViewById(R.id.tv_endtrip);
+            tvName=itemView.findViewById(R.id.tv_nametrip);
+            tvStarttrip=itemView.findViewById(R.id.tv_starttrip);
+            tvEndtrip=itemView.findViewById(R.id.tv_endtrip);
             tvDate=itemView.findViewById(R.id.tv_datetrip);
             tvTime=itemView.findViewById(R.id.tv_timetrip);
             trip_img=itemView.findViewById(R.id.trip_img);

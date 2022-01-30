@@ -3,7 +3,6 @@ package com.example.tripplanner.Home.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,7 +58,6 @@ public class MainLogin extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-
         binding.tvLoginSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +71,8 @@ public class MainLogin extends AppCompatActivity {
                 checkcrededentails();
             }
         });
+
+
 
         binding.tvLoginForgitpasss.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,8 +117,6 @@ public class MainLogin extends AppCompatActivity {
                 signIn();
             }
         });
-
-
 
     }
     private void signIn() {
