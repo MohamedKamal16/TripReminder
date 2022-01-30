@@ -65,16 +65,13 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             @Override
             public void onClick(View v) {
                 initMap(((Trip) tripList.get(position)).getEndPointLatitude(),((Trip) tripList.get(position)).getEndPointLongitude());
+
+               new Thread(() -> Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,((Trip) tripList.get(position)).getId(),Final.FINISHED_TRIP_STATUS)).start();
+              
                
                 initBubble(((Trip) tripList.get(position)).getId(),((Trip) tripList.get(position)).getUserID());
                // unregisterAlarm((Trip) tripList.get(position));
-       //TODO Handle repo database
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,((Trip) tripList.get(position)).getId(),"finished");
-                    }
-                }).start();
+    
 
             }
         });
@@ -84,8 +81,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             public void onClick(View v) {
                 editNotes((Trip) tripList.get(position));
 
-            }
-        });
         holder.btn_canceltrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,7 +177,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
     public void deleteWarnDialog(Trip trip , int position){
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog,(ConstraintLayout) activity.findViewById(R.id.dialogLayoutContainer));
+        View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog, activity.findViewById(R.id.dialogLayoutContainer));
         builder.setView(view);
         ((TextView)view.findViewById(R.id.textTitle)).setText(Final.APP_NAME);
         ((TextView)view.findViewById(R.id.textMessage)).setText("Do you want to delete this trip ?");
@@ -195,7 +190,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
 
         view.findViewById(R.id.btnCancel).setOnClickListener(v -> {
             new Thread(() -> {
-                Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,trip.getId(),"Cancel");
+                Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,trip.getId(),Final.CANCEL_TRIP_STATUS);
             //    unregisterAlarm(trip);
 
             }).start();
