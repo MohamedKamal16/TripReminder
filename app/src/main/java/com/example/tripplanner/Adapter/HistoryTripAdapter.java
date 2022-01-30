@@ -79,6 +79,7 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
         tvstatus=itemView.findViewById(R.id.tv_status_histroy);
         tvNametrip=itemView.findViewById(R.id.tv_nametrip_histroy);
         btndelet=itemView.findViewById(R.id.btn_delethitory);
+
     }
     }
 
@@ -116,3 +117,4 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
         alertDialog.show();
     }
 }
+

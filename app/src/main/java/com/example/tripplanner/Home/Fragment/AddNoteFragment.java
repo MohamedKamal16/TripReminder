@@ -1,6 +1,5 @@
 package com.example.tripplanner.Home.Fragment;
 
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -101,7 +100,7 @@ public class AddNoteFragment extends Fragment {
                             notes.add(selectedNotes.get(i));
                         }
                     }
-                    result.putStringArrayList("bundleKey", notes);
+                   result.putStringArrayList("bundleKey", notes);
                 }
             }else if(AddActivity.key==3){
                 new Thread(() ->
@@ -136,6 +135,7 @@ public class AddNoteFragment extends Fragment {
     private class LoadRoomData extends AsyncTask<Void, Void, Trip> {
         @Override
         protected Trip doInBackground(Void... voids) {
+
             return Home_Activity.database.tripDAO().selectById(AddActivity.ID);
         }
         @Override

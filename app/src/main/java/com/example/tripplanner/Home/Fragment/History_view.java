@@ -1,5 +1,14 @@
 package com.example.tripplanner.Home.Fragment;
 
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tripplanner.Adapter.HistoryTripAdapter;
@@ -15,9 +24,6 @@ public class History_view extends Fragment {
     int finishedTripsNum;
     List tripList=new ArrayList<Trip>();
 
-
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         new addhistroyRoom().execute();
@@ -33,6 +39,7 @@ public class History_view extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        return inflater.inflate(R.layout.fragment_history, container, false);
+
     }
   
   
@@ -42,6 +49,7 @@ public class History_view extends Fragment {
 
         @Override
         protected List<Trip> doInBackground(Void...voids) {
+
             finishedTripsNum=Home_Activity.database.tripDAO().getCountTripType(Home_Activity.fireBaseUserId,"finished");
             return Home_Activity.database.tripDAO().selectHistoryTrip(Home_Activity.fireBaseUserId,"Cancel","Finished","Missed");
 
@@ -51,6 +59,7 @@ public class History_view extends Fragment {
         protected void onPostExecute(List<Trip> trips) {
             super.onPostExecute(trips);
             tripList = trips;
+
             adapter=new HistoryTripAdapter(tripList,getContext(),getActivity());
             LinearLayoutManager manager=new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
             recyclerView.setLayoutManager(manager);

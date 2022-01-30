@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +16,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tripplanner.Home.Activity.AddActivity;
+import com.example.tripplanner.Home.Activity.FloatingBubbleService;
 import com.example.tripplanner.Home.Activity.Home_Activity;
 import com.example.tripplanner.R;
 import com.example.tripplanner.TripData.Final;
@@ -30,7 +34,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
     List tripList;
     Context context;
     Activity activity;
-
 
     public UpcomingRecycleAdapter(List tripList, Context context, Activity activity) {
         this.tripList = tripList;
@@ -62,23 +65,43 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             @Override
             public void onClick(View v) {
                 initMap(((Trip) tripList.get(position)).getEndPointLatitude(),((Trip) tripList.get(position)).getEndPointLongitude());
-
-               new Thread(() -> Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,((Trip) tripList.get(position)).getId(),"finished")).start();
+               
+                initBubble(((Trip) tripList.get(position)).getId(),((Trip) tripList.get(position)).getUserID());
+               // unregisterAlarm((Trip) tripList.get(position));
+       //TODO Handle repo database
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,((Trip) tripList.get(position)).getId(),"finished");
+                    }
+                }).start();
 
             }
         });
 
-        holder.editNotes.setOnClickListener(v -> editNotes((Trip) tripList.get(position)));
+        holder.editNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editNotes((Trip) tripList.get(position));
 
-        holder.btn_canceltrip.setOnClickListener(v -> {
-            deleteWarnDialog( ((Trip) tripList.get(position)),(position-1));
-            tripList.remove((Trip)tripList.get(position));
+            }
         });
+        holder.btn_canceltrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteWarnDialog( ((Trip) tripList.get(position)),(position-1));
+                tripList.remove((Trip)tripList.get(position));
+            }
+        });
+        holder.btn_updatetrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateTrip((Trip) tripList.get(position));
+                notifyDataSetChanged();
+                holder.itemView.setVisibility(View.INVISIBLE);
+            }
 
-        holder.btn_updatetrip.setOnClickListener(v -> {
-            updateTrip((Trip) tripList.get(position));
-            notifyDataSetChanged();
-            holder.itemView.setVisibility(View.INVISIBLE);
+
         });
 
     }
@@ -96,6 +119,9 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         mapIntent.setPackage("com.google.android.apps.maps");
         context.startActivity(mapIntent);
     }
+  
+  
+
 
     public void updateTrip(Trip trip){
         Intent intent = new Intent(context,AddActivity.class);
@@ -114,6 +140,44 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         context.startActivity(intent);
     }
 
+    /*public void unregisterAlarm(Trip trip) {
+        Intent notifyIntent = new Intent(context, AlarmReceiver.class);
+        PendingIntent notifyPendingIntent = PendingIntent.getBroadcast
+                (context,trip.getId(), notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.cancel(notifyPendingIntent);
+        }
+    }*/
+
+    public void initBubble(int tripId, String tripUserId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
+            askPermission();
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            Intent intent = new Intent(context, FloatingBubbleService.class);
+            intent.putExtra(Final.TRIP_ID, tripId);
+            context.startService(intent);
+            activity.finish();
+        } else if (Settings.canDrawOverlays(context)) {
+            Intent intent = new Intent(context, FloatingBubbleService.class);
+            intent.putExtra(Final.TRIP_ID, tripId);
+            context.startService(intent);
+            activity.finish();
+        } else {
+            askPermission();
+
+            Toast.makeText(context,"You need System Alert Window Permission to do this",Toast.LENGTH_LONG).show();
+        }
+
+    }
+    private void askPermission() {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + context.getPackageName()));
+        activity.startActivityForResult(intent, 2084);
+    }
+
+
 
 
     public void deleteWarnDialog(Trip trip , int position){
@@ -125,6 +189,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         ((Button)view.findViewById(R.id.btnOk)).setText("Cancel");
         ((Button)view.findViewById(R.id.btnCancel)).setText("Ok");
         final androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+
 
         view.findViewById(R.id.btnOk).setOnClickListener(v -> alertDialog.dismiss());
 
