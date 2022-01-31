@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.tripplanner.Home.Fragment.History_view;
 import com.example.tripplanner.Home.Fragment.Profile_view;
-import com.example.tripplanner.Home.Fragment.Upcomin_view;
+import com.example.tripplanner.Home.Fragment.Upcoming_view;
 
 
 public class ViewerPageAdapter extends FragmentStateAdapter {
@@ -22,7 +22,7 @@ public class ViewerPageAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new Upcomin_view();
+                return new Upcoming_view();
             case 1:
                 return new History_view();
             default:

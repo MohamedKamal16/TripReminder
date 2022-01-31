@@ -3,14 +3,12 @@ package com.example.tripplanner.Home.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.tripplanner.Home.Activity.Home_Activity;
 import com.example.tripplanner.R;
 import com.example.tripplanner.TripData.Final;
@@ -37,10 +35,10 @@ import java.util.Random;
 
 public class MapsFragment extends Fragment {
     private GoogleMap mMap;
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override
-        public void onMapReady(GoogleMap googleMap) {
+        public void onMapReady(@NonNull GoogleMap googleMap) {
             mMap = googleMap;
             new getFinishedTrips().execute();
         }
@@ -63,34 +61,34 @@ public class MapsFragment extends Fragment {
             mapFragment.getMapAsync(callback);
         }
     }
-    public void drawTrips(double startPointLatitude, double startPointLongitude, double endPointLatitude, double endPointLongitude, String startPoint, String endPoint) {
-        String originPoint = startPointLatitude + "," + startPointLongitude;
-        String destination = endPointLatitude + "," + endPointLongitude;
 
+    public void drawTrips(double startPointLatitude, double startPointLongitude, double endPointLatitude, double endPointLongitude, String startPoint, String endPoint) {
+        String sPoint = startPointLatitude + "," + startPointLongitude;
+        String ePoint = endPointLatitude + "," + endPointLongitude;
+        //get first point location
         LatLng startPointName = new LatLng(startPointLatitude, startPointLongitude);
         mMap.addMarker(new MarkerOptions().position(startPointName).title(startPoint));
-
+        //get Second point location
         LatLng endPointName = new LatLng(endPointLatitude, endPointLongitude);
         mMap.addMarker(new MarkerOptions().position(endPointName).title(endPoint));
-
-        //Define list to get all latlng for the route
+        //Define list to get all latLng for the route
         List<LatLng> path = new ArrayList();
 
         //center
         LatLng center = new LatLng(30.0434, 31.2468);
 
-        //Execute Directions API request
+        // Directions API request
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey(Final.API_KEY)
                 .build();
-        DirectionsApiRequest req = DirectionsApi.getDirections(context, originPoint, destination);
+
+        DirectionsApiRequest req = DirectionsApi.getDirections(context, sPoint, ePoint);
         try {
             DirectionsResult res = req.await();
 
-            //Loop through legs and steps to get encoded polylines of each step
-            if (res.routes != null && res.routes.length > 0) {
+            //Loop through legs and steps to get encoded polyline of each step
+            if (res.routes!= null && res.routes.length > 0) {
                 DirectionsRoute route = res.routes[0];
-
                 if (route.legs != null) {
                     for (int i = 0; i < route.legs.length; i++) {
                         DirectionsLeg leg = route.legs[i];
@@ -103,9 +101,9 @@ public class MapsFragment extends Fragment {
                                         EncodedPolyline points1 = step1.polyline;
                                         if (points1 != null) {
                                             //Decode polyline and add points to list of route coordinates
-                                            List<com.google.maps.model.LatLng> coords1 = points1.decodePath();
-                                            for (com.google.maps.model.LatLng coord1 : coords1) {
-                                                path.add(new LatLng(coord1.lat, coord1.lng));
+                                            List<com.google.maps.model.LatLng> cords1 = points1.decodePath();
+                                            for (com.google.maps.model.LatLng cord1 : cords1) {
+                                                path.add(new LatLng(cord1.lat, cord1.lng));
                                             }
                                         }
                                     }
@@ -113,9 +111,9 @@ public class MapsFragment extends Fragment {
                                     EncodedPolyline points = step.polyline;
                                     if (points != null) {
                                         //Decode polyline and add points to list of route coordinates
-                                        List<com.google.maps.model.LatLng> coords = points.decodePath();
-                                        for (com.google.maps.model.LatLng coord : coords) {
-                                            path.add(new LatLng(coord.lat, coord.lng));
+                                        List<com.google.maps.model.LatLng> cords = points.decodePath();
+                                        for (com.google.maps.model.LatLng cord : cords) {
+                                            path.add(new LatLng(cord.lat, cord.lng));
                                         }
                                     }
                                 }
@@ -125,15 +123,15 @@ public class MapsFragment extends Fragment {
                 }
             }
         } catch (Exception ex) {
-
         }
 
-        //for randoom color
+        //for random color
         Random rnd = new Random();
         int randomColor = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+
         //Draw the polyline
         if (path.size() > 0) {
-            PolylineOptions opts = new PolylineOptions().addAll(path).color(randomColor).width(7);
+            PolylineOptions opts = new PolylineOptions().addAll(path).color(randomColor).width(8);
             mMap.addPolyline(opts);
         }
 

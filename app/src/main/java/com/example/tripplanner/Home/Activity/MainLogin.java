@@ -189,7 +189,7 @@ public class MainLogin extends AppCompatActivity {
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                           Toast.makeText(getApplicationContext(),task.getException().toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),task.getException().toString(),Toast.LENGTH_LONG).show();
 
                             updateUI(null);
                         }
@@ -217,5 +217,5 @@ public class MainLogin extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), Home_Activity.class));
             finish();
         }
-        }
     }
+}

@@ -4,11 +4,6 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.TypeConverter;
-
-import com.example.tripplanner.TripData.Trip;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -39,14 +34,14 @@ public interface TripDAO {
     List<Trip> selectUpcomingTrip(String userId, String status);
 
     @Query("UPDATE Trip SET tripStatus = :tripStatus WHERE id = :id And userID= :userId")
-    int updateTripStatus(String userId, int id, String tripStatus);
+    void updateTripStatus(String userId, int id, String tripStatus);
 
     @Query("UPDATE Trip SET tripName = :tripName , startPoint =:startPoint , endPoint =:endPoint , endPointLatitude=:endPointLat, endPointLongitude=:endPointLong," +
             " date =:date , time=:time, calendar=:calendar WHERE id = :id")
-    int EditTrip(int id, String tripName,String startPoint,String endPoint,double endPointLat,double endPointLong,String date,String time,double calendar);
+    void EditTrip(int id, String tripName,String startPoint,String endPoint,double endPointLat,double endPointLong,String date,String time,double calendar);
 
     @Query("UPDATE Trip SET notes = :notes WHERE id = :id")
-    int EditNotes(int id, String notes);
+    void EditNotes(int id, String notes);
 
     @Query("SELECT COUNT(*) FROM Trip WHERE userId  = :userId And tripStatus LIKE :status" )
     int getCountTripType(String userId ,String status);

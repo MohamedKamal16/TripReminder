@@ -69,7 +69,7 @@ public class AddNoteFragment extends Fragment {
             recyclerView.setAdapter(adapter);
 
         }
-        //Click Method Haandle
+        //Click Method Handle
         btnAddNote.setOnClickListener(v -> {
             if(selectedNotes.size()<=20){
                 selectedNotes.add("");
@@ -103,11 +103,11 @@ public class AddNoteFragment extends Fragment {
                 new Thread(() -> {
                     Home_Activity.database.tripDAO()
                             .EditNotes(AddActivity.ID, selectedNotes.toString());
-                           getActivity().finish();
+                           requireActivity().finish();
                 }).start();
 
             }
-            FragmentManager fragmentManager = getActivity() .getSupportFragmentManager();
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
             fragmentManager.popBackStack ("name", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         });
 
