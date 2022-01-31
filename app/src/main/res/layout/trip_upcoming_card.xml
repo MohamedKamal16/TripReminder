@@ -6,13 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    android:background="@color/GrayFlash"
     >
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="30dp">
+        card_view:cardCornerRadius="30dp"
+        android:background="@color/GrayFlash"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +26,7 @@
 
             <ImageView
                 android:id="@+id/trip_img"
-                android:layout_width="46dp"
+                android:layout_width="20dp"
                 android:layout_height="61dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
@@ -58,7 +61,7 @@
                     android:id="@+id/tv_timetrip"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_marginStart="140dp"
+                    android:layout_marginStart="100dp"
                     android:layout_marginTop="4dp"
                     android:layout_weight="1"
                     android:text="@string/tv_timetrip"
@@ -79,7 +82,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="@+id/tv_datetrip"
-                    app:layout_constraintHorizontal_bias="0.231"
+                    app:layout_constraintHorizontal_bias="0.146"
                     app:layout_constraintStart_toStartOf="@+id/tv_datetrip"
                     app:layout_constraintTop_toBottomOf="@+id/tv_datetrip" />
 
@@ -88,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="20dp"
 
                     android:layout_weight="1"
                     android:text="TextView"
@@ -103,7 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:layout_weight="1"
                     android:text="TextView"
                     android:textColor="@color/black"
@@ -124,10 +127,10 @@
                     android:background="@color/white"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
-                    android:src="@drawable/ic_send_24"
+                    android:src="@drawable/route"
                     app:layout_constraintBottom_toTopOf="@+id/btn_editNote"
                     app:layout_constraintEnd_toEndOf="@+id/tv_timetrip"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/tv_timetrip"
                     app:layout_constraintTop_toBottomOf="@+id/tv_timetrip"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -141,10 +144,11 @@
                     android:background="@color/white"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
-                    android:src="@drawable/notepad"
+                    android:src="@drawable/notes1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/btn_starttrip"
 
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/btn_starttrip"
                     app:layout_constraintTop_toBottomOf="@+id/btn_starttrip"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -157,12 +161,14 @@
 
                     android:backgroundTint="#F4F0F0"
                     android:paddingBottom="10dp"
-                    android:src="@android:drawable/ic_delete"
+                    android:src="@drawable/cancel"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/btn_addtrip_update"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/btn_editNote"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_addtrip_update" />
+                    app:layout_constraintStart_toStartOf="@+id/btn_addtrip_update"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_addtrip_update"
+                    app:layout_constraintVertical_bias="0.671" />
 
                 <ImageButton
 

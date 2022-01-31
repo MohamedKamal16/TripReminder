@@ -19,8 +19,7 @@ public class DataConverter {
         Gson gson=new Gson();
         Type type= new TypeToken<ArrayList<String>>(){}.getType();
         //convert data to json
-        String json=gson.toJson(notes,type);
-        return json;
+        return gson.toJson(notes,type);
     }
 
     //from data as json to Note as list

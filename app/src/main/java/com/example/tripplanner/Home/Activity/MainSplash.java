@@ -20,15 +20,11 @@ public class MainSplash extends AppCompatActivity {
         setContentView(R.layout.activity_main_splash);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainSplash.this, Home_Activity.class);
-                //Intent is used to switch from one activity to another.
-                startActivity(intent);
-                finish();
-            }
-
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(MainSplash.this, Home_Activity.class);
+            //Intent is used to switch from one activity to another.
+            startActivity(intent);
+            finish();
         }, SPLASH_SCREEN_TIME_OUT);
     }
 }

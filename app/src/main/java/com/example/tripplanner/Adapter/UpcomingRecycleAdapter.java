@@ -11,6 +11,7 @@ import android.provider.Settings;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -61,45 +62,32 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         holder.tvStarttrip.setText(tripadd.getStartPoint());
         holder.tvTime.setText(tripadd.getTime());
         holder.tvDate.setText(tripadd.getDate());
-        holder.start_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initMap(((Trip) tripList.get(position)).getEndPointLatitude(),((Trip) tripList.get(position)).getEndPointLongitude());
 
-               new Thread(() -> Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,((Trip) tripList.get(position)).getId(),Final.FINISHED_TRIP_STATUS)).start();
-              
-               
-                initBubble(((Trip) tripList.get(position)).getId(),((Trip) tripList.get(position)).getUserID());
-               // unregisterAlarm((Trip) tripList.get(position));
-    
+        holder.start_btn.setOnClickListener((OnClickListener) v -> {
+            initMap(((Trip) tripList.get(position)).getEndPointLatitude(),((Trip) tripList.get(position)).getEndPointLongitude());
+            new Thread(() -> Home_Activity.database.tripDAO().updateTripStatus(Home_Activity.fireBaseUserId,((Trip) tripList.get(position)).getId(),Final.FINISHED_TRIP_STATUS)).start();
+            initBubble(((Trip) tripList.get(position)).getId(),((Trip) tripList.get(position)).getUserID());
+           // unregisterAlarm((Trip) tripList.get(position));
 
-            }
         });
 
-        holder.editNotes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.editNotes.setOnClickListener((OnClickListener) v -> {
                 editNotes((Trip) tripList.get(position));
-
-        holder.btn_canceltrip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteWarnDialog( ((Trip) tripList.get(position)),(position-1));
-                tripList.remove((Trip)tripList.get(position));
-            }
-        });
-        holder.btn_updatetrip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateTrip((Trip) tripList.get(position));
-                notifyDataSetChanged();
-                holder.itemView.setVisibility(View.INVISIBLE);
-            }
-
-
         });
 
-    }
+        holder.btn_canceltrip.setOnClickListener((OnClickListener) v1 -> {
+                    deleteWarnDialog(((Trip) tripList.get(position)), (position - 1));
+                    tripList.remove((Trip) tripList.get(position));
+                });
+
+        holder.btn_updatetrip.setOnClickListener((OnClickListener) v12 -> {
+                    updateTrip((Trip) tripList.get(position));
+                    notifyDataSetChanged();
+                    holder.itemView.setVisibility(View.INVISIBLE);
+                });
+
+            }
+
 
 
 
@@ -114,9 +102,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         mapIntent.setPackage("com.google.android.apps.maps");
         context.startActivity(mapIntent);
     }
-  
-  
-
 
     public void updateTrip(Trip trip){
         Intent intent = new Intent(context,AddActivity.class);
@@ -126,6 +111,7 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
+
     public void editNotes(Trip trip){
         Intent intent = new Intent(context, AddActivity.class);
         Bundle bundle=new Bundle();
@@ -226,7 +212,6 @@ public class UpcomingRecycleAdapter extends RecyclerView.Adapter<UpcomingRecycle
             editNotes=itemView.findViewById(R.id.btn_editNote);
             btn_updatetrip=itemView.findViewById(R.id.btn_addtrip_update);
             btn_canceltrip=itemView.findViewById(R.id.btn_addtrip_cancel);
-
 
         }
     }

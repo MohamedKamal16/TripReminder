@@ -19,7 +19,6 @@ import com.example.tripplanner.TripData.Final;
 import com.example.tripplanner.TripData.Trip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;

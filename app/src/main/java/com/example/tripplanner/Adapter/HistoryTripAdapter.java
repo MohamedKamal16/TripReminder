@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.os.Message;
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.tripplanner.Home.Activity.Home_Activity;
 import com.example.tripplanner.R;
@@ -18,6 +17,7 @@ import com.example.tripplanner.TripData.Final;
 import com.example.tripplanner.TripData.Trip;
 import java.util.List;
 
+//TODO DELETE BUTTON
 public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.HistoryViewHolder> {
     List tripList;
     Context context;
@@ -47,11 +47,8 @@ public class HistoryTripAdapter extends RecyclerView.Adapter<HistoryTripAdapter.
         holder.tvEndPoint.setText(trip.getEndPoint());
         holder.tvTime.setText(trip.getTime());
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.btnDelete.setOnClickListener(v -> {
 
-            }
         });
 
 

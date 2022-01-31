@@ -200,7 +200,6 @@ private TextView txtNotes;
 
         @Override
         protected Trip doInBackground(Void... voids) {
-            Log.e(Final.LOG_TAG,tripId+"");
             return database.tripDAO().selectById(tripId);
         }
 

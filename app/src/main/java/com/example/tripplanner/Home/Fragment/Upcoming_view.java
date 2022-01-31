@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Upcomin_view extends Fragment {
-    //refernce fbutton and recycle view
+public class Upcoming_view extends Fragment {
+    //reference fButton and recycle view
     FloatingActionButton floatingBtnAdd;
     RecyclerView tripRecycleView;
-    //refernce to addapter
+    //reference to adapter
     private UpcomingRecycleAdapter upcomingRecycleAdapter;
     private List tripsList = new ArrayList<Trip>();
 
@@ -42,10 +42,7 @@ public class Upcomin_view extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       View view= inflater.inflate(R.layout.fragment_upcomingtrips, container, false);
-
-
-        return view;
+        return inflater.inflate(R.layout.fragment_upcomingtrips, container, false);
     }
 
     @Override
@@ -67,7 +64,7 @@ public class Upcomin_view extends Fragment {
         });
     }
 
-   
+
 
     private class addTripRoom extends AsyncTask<Void, Void, List<Trip>> {
 

@@ -7,7 +7,7 @@ import androidx.room.TypeConverters;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/*room deal with @ annoitation this class like column in Table*/
+/*room deal with @ annotation this class like column in Table*/
 
 @Entity //this class name is name of room table if want to change table name (tableName = "Name")
 
